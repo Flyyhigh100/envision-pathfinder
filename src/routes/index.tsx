@@ -16,6 +16,10 @@ import {
   CircleDot,
   ChevronRight,
   Sparkles,
+  Eye,
+  Map as MapIcon,
+  Users,
+  ArrowUp,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
