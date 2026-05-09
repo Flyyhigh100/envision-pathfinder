@@ -1558,6 +1558,7 @@ function Index() {
       </footer>
 
       <DetailPanel node={openNode} phase={phase} role={role} onClose={() => setOpenId(null)} />
+      <BackToOverview />
     </div>
   );
 }
