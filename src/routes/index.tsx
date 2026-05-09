@@ -643,85 +643,33 @@ function StrategyOverview({
 
 function BackToOverview() {
   const [visible, setVisible] = useState(false);
-  if (typeof window !== "undefined") {
-    // attach listener once
-  }
-  // Use effect via inline pattern
-  return (
-    <BackToOverviewInner visible={visible} setVisible={setVisible} />
-  );
-}
-
-function BackToOverviewInner({
-  visible,
-  setVisible,
-}: {
-  visible: boolean;
-  setVisible: (v: boolean) => void;
-}) {
-  // Listen to scroll
-  if (typeof window !== "undefined") {
-    // no-op placeholder; logic handled by useEffect below via separate hook
-  }
-  return (
-    <ScrollWatcher onChange={setVisible}>
-      <AnimatePresence>
-        {visible && (
-          <motion.a
-            href="#overview"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 8 }}
-            transition={{ duration: 0.25 }}
-            className="fixed bottom-6 right-6 z-30 inline-flex items-center gap-2 rounded-full border border-hairline bg-card/95 px-4 py-2 text-xs font-medium shadow-lift backdrop-blur transition-colors hover:border-teal/40 hover:text-teal"
-          >
-            <ArrowUp className="h-3.5 w-3.5 text-teal" />
-            Back to model
-          </motion.a>
-        )}
-      </AnimatePresence>
-    </ScrollWatcher>
-  );
-}
-
-function ScrollWatcher({
-  onChange,
-  children,
-}: {
-  onChange: (v: boolean) => void;
-  children: React.ReactNode;
-}) {
-  useScrollPastOverview(onChange);
-  return <>{children}</>;
-}
-
-function useScrollPastOverview(onChange: (v: boolean) => void) {
-  if (typeof window === "undefined") return;
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  useEffectOnce(() => {
+  useEffect(() => {
     const handler = () => {
       const el = document.getElementById("overview");
       if (!el) return;
-      const bottom = el.getBoundingClientRect().bottom;
-      onChange(bottom < 0);
+      setVisible(el.getBoundingClientRect().bottom < 0);
     };
     handler();
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
-  });
-}
-
-function useEffectOnce(fn: () => void | (() => void)) {
-  // local effect helper to keep imports tight
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const ref = (typeof window !== "undefined") ? (window as unknown as { __soRef?: boolean }) : undefined;
-  // Actually use React.useEffect properly:
-  React.useEffect(() => {
-    const cleanup = fn();
-    return cleanup;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  void ref;
+  return (
+    <AnimatePresence>
+      {visible && (
+        <motion.a
+          href="#overview"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 8 }}
+          transition={{ duration: 0.25 }}
+          className="fixed bottom-6 right-6 z-30 inline-flex items-center gap-2 rounded-full border border-hairline bg-card/95 px-4 py-2 text-xs font-medium shadow-lift backdrop-blur transition-colors hover:border-teal/40 hover:text-teal"
+        >
+          <ArrowUp className="h-3.5 w-3.5 text-teal" />
+          Back to model
+        </motion.a>
+      )}
+    </AnimatePresence>
+  );
 }
 
 function PhaseToggle({ phase, setPhase }: { phase: PhaseKey; setPhase: (p: PhaseKey) => void }) {
