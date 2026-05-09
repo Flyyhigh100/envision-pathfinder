@@ -196,8 +196,8 @@ const NODES: Node[] = [
       { key: "Route", when: "Sensitive data, enterprise scale, or strategic dependency. Hand to the right home — another product line, central team, or escalate to the AI factory." },
     ],
     boundary: [
-      { role: "Product line AI citizen developer", does: "Primary home for ideas originating in or fitting their domain. Builds, reuses, and supports the central team when capacity allows.", when: "When the idea has a clear product-line fit by origin, domain or skill." },
-      { role: "Central team AI citizen developer", does: "Primary home for ideas without a clear product-line owner. Also delivers, enables, absorbs overflow and builds shared capability.", when: "When no product line is the natural fit, or when a product line is at capacity." },
+      { role: "Product line AI citizen developer", does: "Builds, reuses and supports inside the network — same way of working as central peers. Picks up ideas where domain fit and capacity make them the closest match.", when: "When origin, skill or capacity make the product line the best-placed home." },
+      { role: "Central team AI citizen developer", does: "Builds, enables, absorbs overflow and grows shared capability — same way of working as product line peers. Picks up ideas without a clear product-line home.", when: "When no product line is the closer fit, or when capacity in the network sits there." },
       { role: "AI factory", does: "Owns enterprise-grade builds: production data, scaled audiences, complex integrations, load-bearing systems.", when: "Triggered by sensitivity, scale, complexity, or strategic weight — not by ambition alone." },
     ],
   },
