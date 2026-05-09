@@ -127,22 +127,22 @@ const NODES: Node[] = [
     title: "Opportunity Assessment",
     group: "shaping",
     icon: Gauge,
-    definition: "A short, repeatable shaping step that decides what an idea actually is.",
-    why: "Most ideas are not what they first look like. A few targeted questions prevent wasted builds and misrouted work.",
+    definition: "A short, repeatable shaping step that decides what an idea actually is — and where it most naturally belongs.",
+    why: "Most ideas are not what they first look like. A few targeted questions prevent wasted builds and point each idea to its best home in the network.",
     practice:
-      "A 30-minute shaping conversation against a small rubric: value, complexity, data sensitivity, audience, reuse potential.",
-    involved: ["Central AI consultant", "Submitter", "Citizen developer (when relevant)"],
+      "A 30-minute shaping conversation against a small rubric: value, complexity, data sensitivity, audience, reuse potential, and natural domain home. Run by whichever AI citizen developer — product line or central — is the closest fit.",
+    involved: ["Product line AI citizen developer", "Central team AI citizen developer", "Submitter"],
     current:
-      "A one-page rubric. Two consultants triage together. Output is a recommendation, not a verdict.",
+      "A one-page rubric. Shaping is run by the closest available AI citizen developer, with peer review across the network. Output is a recommendation, not a verdict.",
     future: {
-      next: "Rubric is embedded in intake. Common patterns auto-suggest a recommendation for human review.",
+      next: "Rubric is embedded in intake. Common patterns auto-suggest a recommendation and a likely home for human review.",
       north:
-        "Shaping draws on portfolio history. The model learns which assessments held up and which didn't.",
+        "Shaping draws on portfolio history across product lines and central. The model learns which assessments held up and which didn't.",
     },
     audience: {
       business: "A quick, honest read on whether this is worth building and how.",
-      citizen: "Clear scope before you commit time.",
-      consultant: "Your judgement, applied consistently and visibly.",
+      citizen: "Clear scope before you commit time — and the chance to take ideas in your domain early.",
+      consultant: "Shared judgement, applied consistently across the network — not centralised gatekeeping.",
       governance: "Risk is named at the start, not discovered late.",
       factory: "Only the work that genuinely needs you reaches you.",
     },
