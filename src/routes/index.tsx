@@ -217,6 +217,14 @@ const NODES: Node[] = [
       governance: "Visibility of the estate, including what to retire.",
       factory: "Patterns from the field inform what to industrialise.",
     },
+    community: [
+      { label: "Teams community", what: "Open forum for questions, patterns and quick help between citizen developers." },
+      { label: "Weekly office hours", what: "Drop-in time with the central AI consultant — no booking, no agenda required." },
+      { label: "Shared examples library", what: "Real working solutions, with owner, audience and what they reused." },
+      { label: "Reuse showcase", what: "Visible credit when a solution is picked up by another team." },
+      { label: "Monthly show-and-tell", what: "Short demos from builders. Patterns surface; stale items get retired." },
+      { label: "Visible learning loop", what: "What worked, what didn't, what changed in the rubric this quarter." },
+    ],
   },
   {
     id: "value",
