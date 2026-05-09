@@ -935,6 +935,32 @@ function Index() {
             </div>
           </motion.div>
 
+          {/* Operating surface · subtle phase-adaptive note */}
+          <motion.div
+            key={`surface-${phase}`}
+            initial={{ opacity: 0, y: 4 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, delay: 0.05 }}
+            className="mt-4 flex items-start gap-3 rounded-xl border border-hairline bg-card/40 px-4 py-3"
+          >
+            <span className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-teal" />
+            <div className="text-xs leading-relaxed text-muted-foreground">
+              <span className="font-medium uppercase tracking-[0.14em] text-[10px] text-muted-foreground/80">
+                Operating surface
+              </span>
+              <span className="mx-2 text-hairline">·</span>
+              {phase === "now" && (
+                <>Coordination today is intentionally lightweight — a shared intake log and direct conversation. No new platform required yet.</>
+              )}
+              {phase === "next" && (
+                <>Intake, work in progress, support and escalation begin to live inside a shared way-of-working environment used by the AI team and key counterparts — replacing scattered spreadsheets and side channels.</>
+              )}
+              {phase === "north" && (
+                <>The model is supported end-to-end by a shared operational surface: visible portfolio, routed support, reporting inputs and cross-team visibility flow through one place rather than disconnected tools.</>
+              )}
+            </div>
+          </motion.div>
+
           {phase === "now" && (
             <motion.div
               initial={{ opacity: 0, y: 6 }}
