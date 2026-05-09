@@ -206,31 +206,31 @@ const NODES: Node[] = [
     title: "Portfolio & Community",
     group: "scale",
     icon: Library,
-    definition: "A living view of what's been built, by whom, and a community that keeps it useful.",
-    why: "A portfolio prevents reinvention. A community keeps it honest, current, and worth searching.",
+    definition: "A living view of what's been built, by whom, and a community that keeps it useful — across product lines and central.",
+    why: "A portfolio prevents reinvention. A community keeps it honest, current, and worth searching. Shared transparency means everyone can see who is working on what, where support is needed, and where capacity exists.",
     practice:
-      "Every solution is registered with owner, audience, status and a short demo. A monthly community session shares patterns and retires what isn't used.",
-    involved: ["Citizen developers", "Central AI consultant", "Product lines"],
+      "Every solution is registered with owner, audience, status and a short demo. A monthly community session — open to all AI citizen developers, product line and central — shares patterns and retires what isn't used.",
+    involved: ["Product line AI citizen developer", "Central team AI citizen developer", "Product lines"],
     current:
-      "A simple registry plus a monthly show-and-tell. Ownership of stale items reviewed quarterly.",
+      "A simple registry plus a monthly show-and-tell. Ownership of stale items reviewed quarterly. Capacity and load shared informally between product lines and central.",
     future: {
-      next: "Searchable catalogue with usage signals. Reuse paths from any entry. Recognised contributor roles.",
+      next: "Searchable catalogue with usage and capacity signals. Reuse paths from any entry. Recognised contributor roles across both organisational homes.",
       north:
-        "Portfolio is the default starting point for every new idea. Community is self-sustaining across product lines.",
+        "Portfolio is the default starting point for every new idea. The community is self-sustaining, with knowledge and capacity flowing freely between product lines and central.",
     },
     audience: {
       business: "A place to find what already exists before asking for something new.",
-      citizen: "Your work is seen, reused and credited.",
-      consultant: "A real artefact to point at, not a slide.",
+      citizen: "Your work is seen, reused and credited — alongside peers in central and other product lines.",
+      consultant: "A real artefact of the network's output, not a slide.",
       governance: "Visibility of the estate, including what to retire.",
       factory: "Patterns from the field inform what to industrialise.",
     },
     community: [
-      { label: "Teams community", what: "Open forum for questions, patterns and quick help between citizen developers." },
-      { label: "Weekly office hours", what: "Drop-in time with the central AI consultant — no booking, no agenda required." },
+      { label: "Teams community", what: "Open forum for questions, patterns and quick help across all AI citizen developers — product line and central." },
+      { label: "Weekly office hours", what: "Drop-in time hosted in rotation by central and product line AI citizen developers — no booking, no agenda required." },
       { label: "Shared examples library", what: "Real working solutions, with owner, audience and what they reused." },
       { label: "Reuse showcase", what: "Visible credit when a solution is picked up by another team." },
-      { label: "Monthly show-and-tell", what: "Short demos from builders. Patterns surface; stale items get retired." },
+      { label: "Monthly show-and-tell", what: "Short demos from builders across the network. Patterns surface; stale items get retired." },
       { label: "Visible learning loop", what: "What worked, what didn't, what changed in the rubric this quarter." },
     ],
   },
@@ -242,19 +242,19 @@ const NODES: Node[] = [
     definition: "A lightweight way to capture whether solutions are actually used and useful.",
     why: "Without any read on value, the programme cannot defend itself, prioritise, or learn. Heavy measurement, however, kills momentum.",
     practice:
-      "Each solution carries a one-line value hypothesis and a simple usage signal. Quarterly review groups solutions into kept, improved, retired.",
-    involved: ["Solution owner", "Central AI consultant", "Sponsor"],
+      "Each solution carries a one-line value hypothesis and a simple usage signal — captured by whoever owns it, product line or central. Quarterly review groups solutions into kept, improved, retired.",
+    involved: ["Solution owner", "Product line AI citizen developer", "Central team AI citizen developer", "Sponsor"],
     current:
       "Self-reported value note plus basic usage. Deliberately light to avoid theatre.",
     future: {
-      next: "Standard signals (usage, time saved, satisfaction) collected consistently. Quarterly portfolio read-out.",
+      next: "Standard signals (usage, time saved, satisfaction) collected consistently across product lines and central. Quarterly portfolio read-out.",
       north:
         "Value evidence informs funding and routing decisions. Stays proportionate — never a tax on small wins.",
     },
     audience: {
       business: "Confidence that what you sponsored is worth keeping.",
       citizen: "A simple way to show your work mattered.",
-      consultant: "Evidence to prioritise the next wave.",
+      consultant: "Evidence to prioritise the next wave across the network.",
       governance: "A basis to retire solutions that no longer earn their place.",
       factory: "Signal on which patterns deserve enterprise-grade investment.",
     },
@@ -264,30 +264,30 @@ const NODES: Node[] = [
     title: "Training & Enablement",
     group: "scale",
     icon: GraduationCap,
-    definition: "The full support model that lets more people build safely — not just training.",
-    why: "Scale comes from more capable hands and a place to turn when stuck. Courses alone don't deliver that.",
+    definition: "The shared support model that lets more people build safely — for AI citizen developers wherever they sit.",
+    why: "Scale comes from more capable hands and a place to turn when stuck. Both product line and central AI citizen developers need training, upskilling and support — they follow one common way of working, not two.",
     practice:
-      "A platform provided and evolved by the AI factory, sitting under a layered support model: self-service, community, enablement team, and technical escalation when needed.",
-    involved: ["AI factory (platform)", "Central AI consultant", "Citizen developers", "Data & governance"],
+      "A platform provided and evolved by the AI factory, sitting under a layered support model: self-service, community, enablement (drawn from across the network), and technical escalation when needed.",
+    involved: ["AI factory (platform)", "Central team AI citizen developer", "Product line AI citizen developer", "Data & governance"],
     current:
-      "Citizen development platform in place. Office hours, a Teams community, starter playbooks and an AI buddy assistant. Technical escalation path defined.",
+      "Citizen development platform in place. Office hours, a Teams community, starter playbooks and an AI buddy assistant. Technical escalation path defined. Training open to all AI citizen developers, regardless of where they sit.",
     future: {
-      next: "Role-based learning paths. Certified citizen developers. Playbooks kept current by the community. AI buddy guides more of the build.",
+      next: "Role-based learning paths shared across product lines and central. Certified AI citizen developers. Playbooks kept current by the community. AI buddy guides more of the build.",
       north:
-        "Enablement embedded in product lines. Self-service handles the common case; escalation is rare and clean.",
+        "Enablement embedded in product lines, supported by central. Self-service handles the common case; escalation is rare and clean.",
     },
     audience: {
       business: "Help when you need it, not a six-week course you don't have time for.",
-      citizen: "A real path from first build to confident contributor — with backup when you hit a wall.",
-      consultant: "Your time spent on shaping, not repeating the basics.",
+      citizen: "A real path from first build to confident contributor — same playbook as your central peers, with backup when you hit a wall.",
+      consultant: "Shared craft across the network — your time spent on shaping and coaching, not repeating the basics.",
       governance: "Builders who understand the boundaries before they hit them.",
       factory: "A platform you own, a community that uses it well, and a clean path for the issues that need you.",
     },
     tiers: [
       { tier: "Self-service", what: "Citizen development platform, playbooks, examples, AI buddy / guided assistant." },
-      { tier: "Community", what: "Teams forum, peer help, monthly show-and-tell." },
-      { tier: "Enablement team", what: "Office hours, paired-build sessions, coaching from the central AI consultant." },
-      { tier: "Technical escalation", what: "AI factory engineering support for issues beyond normal citizen developer help." },
+      { tier: "Community", what: "Teams forum, peer help across product lines and central, monthly show-and-tell." },
+      { tier: "Enablement", what: "Office hours, paired-build sessions and coaching — provided by central and senior product line AI citizen developers." },
+      { tier: "Technical escalation", what: "AI factory engineering support for issues beyond normal AI citizen developer help." },
     ],
   },
   {
@@ -295,11 +295,11 @@ const NODES: Node[] = [
     title: "Governance & Boundaries",
     group: "guardrails",
     icon: ShieldCheck,
-    definition: "The clear, lightweight rules that say what is safe to build where, and with which data.",
-    why: "Without boundaries, citizen development slows or breaks. With heavy ones, it never starts. The point is to make safe, fast.",
+    definition: "The clear, lightweight rules that say what is safe to build where, and with which data — applied the same way across the network.",
+    why: "Without boundaries, citizen development slows or breaks. With heavy ones, it never starts. The point is to make safe, fast — and the rules apply equally to product line and central builds.",
     practice:
-      "A short policy on data classes, allowed patterns, and review thresholds. Anything above the line goes through a defined review; anything below is encouraged.",
-    involved: ["Data & governance", "Central AI consultant", "AI factory (for escalations)"],
+      "A short policy on data classes, allowed patterns, and review thresholds. Anything above the line goes through a defined review; anything below is encouraged. Same rules, wherever the build happens.",
+    involved: ["Data & governance", "Central team AI citizen developer", "Product line AI citizen developer", "AI factory (for escalations)"],
     current:
       "A one-page policy. Defined thresholds for review. Sensitive data routes via approved patterns only.",
     future: {
@@ -309,8 +309,8 @@ const NODES: Node[] = [
     },
     audience: {
       business: "Confidence that what's encouraged is genuinely safe.",
-      citizen: "Clear lines so you can move fast inside them.",
-      consultant: "A defensible answer when shaping work.",
+      citizen: "Clear lines so you can move fast inside them — same lines as your central peers.",
+      consultant: "A defensible answer when shaping work, consistent across the network.",
       governance: "Proportionate control without becoming a bottleneck.",
       factory: "Clean handover for anything that needs enterprise-grade controls.",
     },
