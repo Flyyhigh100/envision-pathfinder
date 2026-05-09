@@ -81,6 +81,12 @@ type Node = {
   current: string;
   future: Record<Exclude<PhaseKey, "now">, string>;
   audience: Record<RoleKey, string>;
+  spine?: boolean;
+  rubric?: { q: string; signals: { reuse: string; build: string; route: string } }[];
+  paths?: { key: "Reuse" | "Build" | "Route"; when: string }[];
+  boundary?: { role: string; does: string; when: string }[];
+  tiers?: { tier: string; what: string }[];
+  community?: { label: string; what: string }[];
 };
 
 const NODES: Node[] = [
@@ -139,10 +145,11 @@ const NODES: Node[] = [
     title: "Build · Reuse · Route",
     group: "delivery",
     icon: GitBranch,
+    spine: true,
     definition: "The decision on how an idea becomes a working solution: build it, reuse something, or route it on.",
-    why: "Treating every idea as a fresh build is the fastest way to fragment the estate. Reuse and routing protect both speed and coherence.",
+    why: "This is the spine of the model. Treating every idea as a fresh build fragments the estate; refusing to build kills momentum. The call made here shapes everything downstream.",
     practice:
-      "Four clear paths: build it locally, reuse an existing solution with light tailoring, route to a product line that already owns the space, or escalate to the AI factory.",
+      "A short rubric is applied in shaping. The output is a recommended path — Reuse, Build, or Route — with the reasoning visible.",
     involved: ["Citizen developer", "Central AI consultant", "Product line owner", "AI factory (when escalated)"],
     current:
       "Decision made in shaping. Reuse encouraged but mostly word-of-mouth. Routing relies on known relationships.",
@@ -158,6 +165,33 @@ const NODES: Node[] = [
       governance: "Routing decisions are recorded and reviewable.",
       factory: "Escalations arrive shaped and justified, not raw.",
     },
+    rubric: [
+      {
+        q: "Is there already a solution that could be reused?",
+        signals: { reuse: "Yes, with light tailoring", build: "Close but materially different", route: "Yes, owned by another product line" },
+      },
+      {
+        q: "Does the use case touch sensitive or governed data?",
+        signals: { reuse: "Approved pattern exists", build: "Standard data only", route: "Needs enterprise-grade controls" },
+      },
+      {
+        q: "Is the audience local or enterprise-wide?",
+        signals: { reuse: "Local, similar to existing users", build: "Local team or function", route: "Cross-business or critical" },
+      },
+      {
+        q: "Is the effort small and local, or complex and strategic?",
+        signals: { reuse: "Small tailoring", build: "Small to medium, well-shaped", route: "Complex, strategic, or load-bearing" },
+      },
+    ],
+    paths: [
+      { key: "Reuse", when: "An existing solution covers most of the need. Tailor lightly, credit the original, log the avoided build." },
+      { key: "Build", when: "Local scope, standard data, citizen-developer-sized. Shape it, build it, register it." },
+      { key: "Route", when: "Sensitive data, enterprise scale, or strategic dependency. Hand to a product line or escalate to the AI factory." },
+    ],
+    boundary: [
+      { role: "Central AI consultant", does: "Shapes the idea, applies the rubric, recommends the path. Coaches citizen developers through build and reuse.", when: "Every idea passes through here." },
+      { role: "AI factory", does: "Owns enterprise-grade builds: production data, scaled audiences, complex integrations, load-bearing systems.", when: "Triggered by sensitivity, scale, complexity, or strategic weight — not by ambition alone." },
+    ],
   },
   {
     id: "portfolio",
@@ -183,6 +217,14 @@ const NODES: Node[] = [
       governance: "Visibility of the estate, including what to retire.",
       factory: "Patterns from the field inform what to industrialise.",
     },
+    community: [
+      { label: "Teams community", what: "Open forum for questions, patterns and quick help between citizen developers." },
+      { label: "Weekly office hours", what: "Drop-in time with the central AI consultant — no booking, no agenda required." },
+      { label: "Shared examples library", what: "Real working solutions, with owner, audience and what they reused." },
+      { label: "Reuse showcase", what: "Visible credit when a solution is picked up by another team." },
+      { label: "Monthly show-and-tell", what: "Short demos from builders. Patterns surface; stale items get retired." },
+      { label: "Visible learning loop", what: "What worked, what didn't, what changed in the rubric this quarter." },
+    ],
   },
   {
     id: "value",
@@ -214,25 +256,31 @@ const NODES: Node[] = [
     title: "Training & Enablement",
     group: "scale",
     icon: GraduationCap,
-    definition: "How more people become safely capable of building useful AI solutions.",
-    why: "Scale comes from more capable hands, not more central capacity. Enablement is the multiplier.",
+    definition: "The full support model that lets more people build safely — not just training.",
+    why: "Scale comes from more capable hands and a place to turn when stuck. Courses alone don't deliver that.",
     practice:
-      "A short onboarding path, office hours each week, paired-build sessions, and a small library of patterns that work.",
-    involved: ["Central AI consultant", "Citizen developers", "Data & governance"],
+      "A platform provided and evolved by the AI factory, sitting under a layered support model: self-service, community, enablement team, and technical escalation when needed.",
+    involved: ["AI factory (platform)", "Central AI consultant", "Citizen developers", "Data & governance"],
     current:
-      "Onboarding session, weekly office hours, a starter pattern library. Personal coaching where it matters most.",
+      "Citizen development platform in place. Office hours, a Teams community, starter playbooks and an AI buddy assistant. Technical escalation path defined.",
     future: {
-      next: "Role-based learning paths. Certified citizen developers. Pattern library kept current by the community.",
+      next: "Role-based learning paths. Certified citizen developers. Playbooks kept current by the community. AI buddy guides more of the build.",
       north:
-        "Enablement embedded in product lines. New joiners productive in weeks, not quarters.",
+        "Enablement embedded in product lines. Self-service handles the common case; escalation is rare and clean.",
     },
     audience: {
       business: "Help when you need it, not a six-week course you don't have time for.",
-      citizen: "A real path from first build to confident contributor.",
+      citizen: "A real path from first build to confident contributor — with backup when you hit a wall.",
       consultant: "Your time spent on shaping, not repeating the basics.",
       governance: "Builders who understand the boundaries before they hit them.",
-      factory: "A pipeline of capable people you can collaborate with.",
+      factory: "A platform you own, a community that uses it well, and a clean path for the issues that need you.",
     },
+    tiers: [
+      { tier: "Self-service", what: "Citizen development platform, playbooks, examples, AI buddy / guided assistant." },
+      { tier: "Community", what: "Teams forum, peer help, monthly show-and-tell." },
+      { tier: "Enablement team", what: "Office hours, paired-build sessions, coaching from the central AI consultant." },
+      { tier: "Technical escalation", what: "AI factory engineering support for issues beyond normal citizen developer help." },
+    ],
   },
   {
     id: "governance",
@@ -265,6 +313,7 @@ type Scenario = {
   id: string;
   title: string;
   prompt: string;
+  tension: string;
   path: NodeId[];
   start: NodeId;
   outcome: string;
@@ -276,107 +325,129 @@ type Scenario = {
 const SCENARIOS: Scenario[] = [
   {
     id: "exec-quick",
-    title: "Executive needs a quick solution",
-    prompt: "A leader has a clear, narrow need and wants something usable soon.",
-    path: ["intake", "assessment", "route"],
-    start: "intake",
-    outcome: "Built locally by a citizen developer with shaping support.",
-    involves: ["business", "consultant", "citizen"],
-    next: "Register in portfolio, capture a one-line value hypothesis, set a 6-week check-in.",
-    reactions: {
-      now: "Shaped within a week. Built with a known pattern. Live in two to three weeks.",
-      next: "Reuse check first. If nothing fits, a citizen developer builds against a paved pattern.",
-      north: "Intake suggests a reusable solution on the spot. Tailoring takes days, not weeks.",
-    },
-  },
-  {
-    id: "reuse",
-    title: "A product line already has a similar tool",
-    prompt: "The idea overlaps meaningfully with something a product line already runs.",
+    title: "Executive wants it now — but a similar tool may exist",
+    prompt: "A leader has pushed for a quick solution. Shaping suggests a product line already runs something close.",
+    tension: "Speed of response vs. cost of a parallel build the executive doesn't yet know about.",
     path: ["intake", "assessment", "portfolio", "route"],
     start: "intake",
-    outcome: "Routed to the existing owner; the requester becomes a second user, not a second build.",
+    outcome: "Reuse path proposed back to the executive within days, with a candid note on what it does and doesn't cover.",
     involves: ["business", "consultant", "citizen"],
-    next: "Owner tailors lightly if needed. Reuse credited. Avoided build logged for the portfolio view.",
+    next: "If reuse is accepted, light tailoring by the owning team. If rejected with reason, build proceeds and the gap is logged.",
     reactions: {
-      now: "Match found in shaping conversation. Warm intro to the owning team.",
-      next: "Catalogue surfaces the match at intake. Reuse path is the default recommendation.",
-      north: "Reuse happens before a request becomes a build. Most overlap is resolved in seconds.",
-    },
-  },
-  {
-    id: "no-time",
-    title: "Business user has an idea but no time",
-    prompt: "A strong idea from someone who cannot build it themselves.",
-    path: ["intake", "assessment", "route", "training"],
-    start: "intake",
-    outcome: "Paired with a citizen developer who builds it; submitter stays as the product owner.",
-    involves: ["business", "citizen", "consultant"],
-    next: "Light enablement so the submitter can iterate later. Solution registered with both names.",
-    reactions: {
-      now: "Pair-up at the weekly triage. Build sized to fit a citizen developer's available time.",
-      next: "Standing pool of citizen developers takes work in. Submitters get a clear timeline.",
-      north: "Marketplace-style matching. Submitter follows progress without project overhead.",
+      now: "Match found in shaping. Consultant brokers the conversation between executive and owning team.",
+      next: "Catalogue surfaces the match at intake. The reuse-vs-build call is made with evidence, not opinion.",
+      north: "Intake proposes the reusable solution before the request is even submitted formally.",
     },
   },
   {
     id: "governed-data",
-    title: "Idea needs governed enterprise data",
-    prompt: "Useful only with data that carries real sensitivity or controls.",
+    title: "A business user has an idea — it may touch governed data",
+    prompt: "The idea looks small. The data behind it might not be.",
+    tension: "Encourage the build vs. risk a sensitive-data exposure that lands later as a finding.",
     path: ["intake", "assessment", "governance", "route"],
     start: "intake",
-    outcome: "Built against an approved pattern, with data access reviewed once and reused thereafter.",
+    outcome: "Governance reviewed in shaping. If a pre-approved pattern fits, build proceeds; if not, the use case is reshaped or routed.",
     involves: ["business", "governance", "consultant", "citizen"],
-    next: "Pattern added to the approved library so the next similar idea is faster.",
+    next: "Pattern (or its absence) is recorded so the next similar idea is faster — or honestly slower.",
     reactions: {
-      now: "Governance review in shaping. Approved connector pattern used. Build proceeds with confidence.",
-      next: "Pre-approved data patterns cover most cases. Review is targeted at genuinely new ones.",
-      north: "Safe-by-construction platform. Governance focuses on policy, not per-build sign-off.",
+      now: "Governance joins the shaping call. Reshape is a real option, not a polite refusal.",
+      next: "Pre-approved data patterns cover most cases. Review focuses on genuinely new ones.",
+      north: "Platform makes the safe path the default; governance reviews exceptions, not every build.",
+    },
+  },
+  {
+    id: "local-vs-enterprise",
+    title: "A team wants to build locally — the use case may need enterprise support",
+    prompt: "A confident team wants to crack on. Shaping signals scale, criticality, or load-bearing dependencies.",
+    tension: "Local momentum and ownership vs. the cost of a fragile build under enterprise weight.",
+    path: ["intake", "assessment", "route"],
+    start: "intake",
+    outcome: "An honest call: build locally with named limits, or route to AI factory with the team's input preserved.",
+    involves: ["citizen", "consultant", "factory"],
+    next: "If routed, the team stays close as a product owner — they don't disappear from their own idea.",
+    reactions: {
+      now: "Consultant names the trade-off explicitly: what local build can carry, and what it can't.",
+      next: "Defined thresholds make this conversation faster and less personal.",
+      north: "Most ideas have an obvious home; the boundary cases are rare and well-handled.",
+    },
+  },
+  {
+    id: "reuse-vs-rebuild",
+    title: "A product line already has a similar tool — reuse or rebuild?",
+    prompt: "Overlap is real but partial. The owning team is busy. The new requester wants control.",
+    tension: "Reuse protects coherence but borrows someone else's roadmap. Rebuild is faster locally but fragments the estate.",
+    path: ["intake", "assessment", "portfolio", "route"],
+    start: "intake",
+    outcome: "Three honest options put on the table: reuse-as-is, sponsor a small extension on the existing tool, or build with a stated end-of-life if the original catches up.",
+    involves: ["business", "consultant", "citizen"],
+    next: "Whichever path is chosen, the decision and reasoning are recorded in the portfolio.",
+    reactions: {
+      now: "Brokered conversation between teams. Decision documented even if it's a rebuild.",
+      next: "Catalogue shows usage and roadmap of the existing tool, making the call easier.",
+      north: "Reuse, extension, and rebuild are first-class options — chosen, not defaulted into.",
     },
   },
   {
     id: "escalate",
-    title: "Idea should be escalated to the AI factory",
-    prompt: "Real complexity, enterprise scale or critical dependencies.",
+    title: "An idea is escalated to the AI factory — what triggers it, what happens next",
+    prompt: "Sensitivity, scale, complexity or strategic weight push the idea past the citizen line.",
+    tension: "Escalation must be earned, not aspirational. Too eager and the factory becomes a bottleneck; too reluctant and risk leaks into citizen builds.",
     path: ["intake", "assessment", "route", "governance"],
     start: "intake",
-    outcome: "Escalated with a shaped brief: problem, value, constraints, and what's already been tried.",
+    outcome: "Escalated with a shaped brief: problem, value, constraints, what's been tried. Factory accepts, defers with reason, or sends back with a smaller scope to try first.",
     involves: ["consultant", "factory", "governance"],
-    next: "Factory takes ownership. Citizen community kept informed; any interim solution clearly marked.",
+    next: "Citizen community kept informed. Any interim solution is clearly marked as interim, not the answer.",
     reactions: {
-      now: "Warm handover with a one-page brief. Factory accepts or sends back with a reason.",
-      next: "Defined escalation path with SLAs. Briefs follow a shared template.",
-      north: "Continuous flow between citizen builds and factory programmes. Patterns travel both ways.",
+      now: "Warm handover with a one-page brief. Triggers (sensitive data, scale, criticality) named explicitly.",
+      next: "Defined escalation path with SLAs. Briefs follow a shared template; deferrals come with a reason.",
+      north: "Continuous flow between citizen builds and factory programmes. Patterns travel in both directions.",
     },
   },
 ];
 
-const OPEN_QUESTIONS = [
+type QuestionTag = "Ownership TBD" | "Policy Needed" | "Design Decision" | "Operating Assumption";
+
+const OPEN_QUESTIONS: { q: string; tag: QuestionTag }[] = [
   {
     q: "Where does ownership sit when a citizen build outgrows its original team?",
-    tag: "Ownership",
+    tag: "Ownership TBD",
   },
   {
     q: "How deep should governance go before it becomes a brake on momentum?",
-    tag: "Governance depth",
+    tag: "Policy Needed",
   },
   {
-    q: "What does training look like once demand outpaces central capacity?",
-    tag: "Training scale",
+    q: "What does enablement look like once demand outpaces central capacity?",
+    tag: "Design Decision",
   },
   {
-    q: "When does value tracking move from a one-line note to something more formal?",
-    tag: "Value tracking",
+    q: "When does value tracking move from a simple log to something more formal?",
+    tag: "Operating Assumption",
   },
   {
     q: "Who arbitrates when a product line and a citizen build claim the same space?",
-    tag: "Routing conflicts",
+    tag: "Ownership TBD",
   },
   {
     q: "What is the right trigger to escalate from citizen build to AI factory?",
-    tag: "Escalation",
+    tag: "Policy Needed",
+  },
+  {
+    q: "What is the right balance between platform standardisation and local flexibility?",
+    tag: "Design Decision",
+  },
+  {
+    q: "How much of intake volume is realistic to absorb in the first six months?",
+    tag: "Operating Assumption",
   },
 ];
+
+const QUESTION_TAG_STYLE: Record<QuestionTag, string> = {
+  "Ownership TBD": "border-charcoal/30 bg-charcoal text-primary-foreground",
+  "Policy Needed": "border-teal/40 bg-teal-soft text-teal",
+  "Design Decision": "border-hairline bg-surface text-foreground",
+  "Operating Assumption": "border-hairline bg-card text-muted-foreground",
+};
 
 // --- Components ------------------------------------------------------------
 
@@ -465,10 +536,19 @@ function NodeCard({
       animate={{ opacity: dimmed ? 0.45 : 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
       className={cn(
-        "group relative flex h-full w-full flex-col gap-3 rounded-2xl border bg-card p-5 text-left shadow-soft transition-shadow hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        highlighted ? "border-teal/60 ring-1 ring-teal/30" : "border-hairline",
+        "group relative flex h-full w-full flex-col gap-3 rounded-2xl border p-5 text-left shadow-soft transition-shadow hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        node.spine
+          ? "bg-charcoal text-primary-foreground border-charcoal shadow-lift"
+          : "bg-card",
+        highlighted && !node.spine ? "border-teal/60 ring-1 ring-teal/30" : "",
+        !highlighted && !node.spine ? "border-hairline" : "",
       )}
     >
+      {node.spine && (
+        <span className="absolute -top-2 right-4 inline-flex items-center gap-1 rounded-full bg-teal px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-primary-foreground shadow-soft">
+          Spine of the model
+        </span>
+      )}
       {step !== null && (
         <span
           className={cn(
@@ -483,18 +563,23 @@ function NodeCard({
         <span
           className={cn(
             "inline-flex h-9 w-9 items-center justify-center rounded-lg",
-            highlighted ? "bg-teal-soft text-teal" : "bg-surface text-charcoal",
+            node.spine
+              ? "bg-teal text-primary-foreground"
+              : highlighted ? "bg-teal-soft text-teal" : "bg-surface text-charcoal",
           )}
         >
           <Icon className="h-4 w-4" />
         </span>
-        <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+        <span className={cn(
+          "text-[10px] font-medium uppercase tracking-[0.14em]",
+          node.spine ? "text-primary-foreground/60" : "text-muted-foreground",
+        )}>
           {node.group}
         </span>
       </div>
       <div>
-        <h3 className="text-lg leading-snug">{node.title}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{node.definition}</p>
+        <h3 className={cn("leading-snug", node.spine ? "text-xl" : "text-lg")}>{node.title}</h3>
+        <p className={cn("mt-1 text-sm", node.spine ? "text-primary-foreground/70" : "text-muted-foreground")}>{node.definition}</p>
       </div>
       <div className="mt-auto flex items-center justify-between gap-3 border-t border-hairline pt-3">
         <span className="text-xs text-muted-foreground line-clamp-2">
@@ -569,6 +654,103 @@ function DetailPanel({
                 </h4>
                 <p className="mt-2 text-base leading-relaxed">{node.practice}</p>
               </section>
+
+              {node.rubric && node.paths && (
+                <section className="rounded-xl border border-charcoal/15 bg-charcoal/[0.03] p-5">
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-teal">
+                    Decision rubric
+                  </h4>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Four short questions. The pattern of answers points to the likely path.
+                  </p>
+                  <ul className="mt-4 space-y-3">
+                    {node.rubric.map((r) => (
+                      <li key={r.q} className="rounded-lg border border-hairline bg-card p-3">
+                        <div className="text-sm font-medium">{r.q}</div>
+                        <div className="mt-2 grid gap-1.5 text-xs sm:grid-cols-3">
+                          <div><span className="font-medium text-teal">Reuse</span> · <span className="text-muted-foreground">{r.signals.reuse}</span></div>
+                          <div><span className="font-medium text-foreground">Build</span> · <span className="text-muted-foreground">{r.signals.build}</span></div>
+                          <div><span className="font-medium text-charcoal">Route</span> · <span className="text-muted-foreground">{r.signals.route}</span></div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5">
+                    <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                      Likely path
+                    </div>
+                    <div className="mt-2 grid gap-2 sm:grid-cols-3">
+                      {node.paths.map((p) => (
+                        <div key={p.key} className="rounded-lg border border-hairline bg-card p-3">
+                          <div className={cn(
+                            "text-xs font-semibold uppercase tracking-wider",
+                            p.key === "Reuse" ? "text-teal" : p.key === "Route" ? "text-charcoal" : "text-foreground",
+                          )}>{p.key}</div>
+                          <div className="mt-1 text-xs leading-relaxed text-muted-foreground">{p.when}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {node.boundary && (
+                <section>
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    Where the boundary sits
+                  </h4>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {node.boundary.map((b) => (
+                      <div key={b.role} className="rounded-lg border border-hairline bg-surface p-4">
+                        <div className="text-sm font-medium">{b.role}</div>
+                        <div className="mt-1.5 text-xs leading-relaxed">{b.does}</div>
+                        <div className="mt-2 text-[11px] uppercase tracking-wider text-teal">When</div>
+                        <div className="text-xs text-muted-foreground">{b.when}</div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {node.tiers && (
+                <section>
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    Support tiers
+                  </h4>
+                  <ol className="mt-3 space-y-2">
+                    {node.tiers.map((t, i) => (
+                      <li key={t.tier} className="flex items-start gap-3 rounded-lg border border-hairline bg-surface p-3">
+                        <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-teal/40 bg-card text-[11px] font-medium text-teal">
+                          {i + 1}
+                        </span>
+                        <div>
+                          <div className="text-sm font-medium">{t.tier}</div>
+                          <div className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{t.what}</div>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="mt-2 text-[11px] text-muted-foreground">
+                    Self-service → community → enablement team → AI factory technical escalation.
+                  </p>
+                </section>
+              )}
+
+              {node.community && (
+                <section>
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    How knowledge travels
+                  </h4>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {node.community.map((c) => (
+                      <div key={c.label} className="rounded-lg border border-hairline bg-surface p-3">
+                        <div className="text-sm font-medium">{c.label}</div>
+                        <div className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{c.what}</div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
 
               <section>
                 <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
@@ -692,6 +874,11 @@ function Index() {
               <em className="not-italic">long term</em>. React, push back, refine.
             </p>
 
+            <p className="mt-5 max-w-2xl border-l-2 border-hairline pl-3 text-xs leading-relaxed text-muted-foreground">
+              This is not a final org design, governance policy, or technical architecture. It is
+              a proposed operating model to support alignment and refinement.
+            </p>
+
             <div className="mt-8 flex flex-wrap items-center gap-3 md:hidden">
               <RoleToggle role={role} setRole={setRole} />
               <PhaseToggle phase={phase} setPhase={setPhase} />
@@ -747,6 +934,43 @@ function Index() {
               ))}
             </div>
           </motion.div>
+
+          {phase === "now" && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              className="mt-4 grid gap-3 rounded-2xl border border-dashed border-hairline bg-card/60 p-5 md:grid-cols-3 md:p-6"
+            >
+              <div>
+                <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-teal">
+                  Grounding signal · not a commitment
+                </div>
+                <div className="mt-1.5 text-sm font-medium">Rough intake volume</div>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Plan for ~15–30 ideas per month in the first six months. Triage cadence sized to that, not to ambition.
+                </p>
+              </div>
+              <div className="border-t border-hairline pt-3 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+                <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                  Likely split
+                </div>
+                <div className="mt-1.5 text-sm font-medium">Built · Reused · Routed · Parked</div>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Working assumption: roughly 35% built locally, 25% reused, 25% routed, 15% parked or reshaped. Calibrated each quarter.
+                </p>
+              </div>
+              <div className="border-t border-hairline pt-3 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+                <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                  Lightweight value tracking
+                </div>
+                <div className="mt-1.5 text-sm font-medium">Intake log · spreadsheet tagging · quarterly note</div>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  A shared intake log, simple status and value tags in a spreadsheet, and a one-page quarterly read-out. No tooling project required.
+                </p>
+              </div>
+            </motion.div>
+          )}
         </div>
       </section>
 
@@ -1021,13 +1245,21 @@ function Index() {
           <div className="flex items-end justify-between gap-6">
             <div>
               <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                05 · Open questions & refinement areas
+                05 · Working document · open questions
               </div>
-              <h2 className="mt-2 text-3xl md:text-4xl">Where this draft is least confident.</h2>
+              <h2 className="mt-2 text-3xl md:text-4xl">A live list — push on it.</h2>
               <p className="mt-3 max-w-2xl text-muted-foreground">
-                These are the places to push on. They are open on purpose — bringing opinions
-                here is the point of the conversation.
+                These questions are open on purpose. Each is tagged so it's clear what kind of
+                input is needed: someone to own it, a policy call, a design choice, or an
+                assumption to validate. Bring an opinion — that is the point of the conversation.
               </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {(["Ownership TBD", "Policy Needed", "Design Decision", "Operating Assumption"] as QuestionTag[]).map((t) => (
+                  <span key={t} className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider", QUESTION_TAG_STYLE[t])}>
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -1040,11 +1272,11 @@ function Index() {
                 <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface font-mono text-xs text-teal">
                   Q{i + 1}
                 </span>
-                <div>
-                  <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                <div className="min-w-0">
+                  <span className={cn("inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider", QUESTION_TAG_STYLE[q.tag])}>
                     {q.tag}
-                  </div>
-                  <p className="mt-1 text-base leading-relaxed">{q.q}</p>
+                  </span>
+                  <p className="mt-2 text-base leading-relaxed">{q.q}</p>
                 </div>
               </div>
             ))}
