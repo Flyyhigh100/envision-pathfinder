@@ -103,9 +103,9 @@ const NODES: Node[] = [
     group: "intake",
     icon: Inbox,
     definition: "A shared, low-friction front door for any AI idea — visible to the whole network, not owned by one team.",
-    why: "Without a shared view of demand, ideas get lost, duplicated, or quietly built in shadow. One visible intake lets work route to its most natural home — a product line where the fit is strongest, or the central team when no clear home exists.",
+    why: "Without a shared view of demand, ideas get lost, duplicated, or quietly built in shadow. One visible intake lets work route to whoever is best placed to handle it — by origin, skill, and available capacity, not by default to one team.",
     practice:
-      "Anyone submits an idea in a few short fields. It is acknowledged within days and routed to the closest fit — product line first when the domain matches, central team when it doesn't, with mutual support either way.",
+      "Anyone submits an idea in a few short fields. It is acknowledged within days and routed to the closest fit — picked up by whichever AI citizen developer, product line or central, has the right skill and the capacity. Mutual support flows in both directions.",
     involved: ["Business user", "Product line AI citizen developer", "Central team AI citizen developer"],
     current:
       "A simple form plus a weekly triage shared between central team and product line representatives. Light tagging by domain, data sensitivity and effort.",
