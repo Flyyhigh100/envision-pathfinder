@@ -554,6 +554,176 @@ const BAND_STYLE: Record<StrategyNode["band"], string> = {
 
 // --- Components ------------------------------------------------------------
 
+function StrategyOverview({
+  onSelect,
+}: {
+  onSelect: (target: StrategyTarget) => void;
+}) {
+  return (
+    <section
+      id="overview"
+      className="relative scroll-mt-20 border-b border-hairline bg-card/30"
+    >
+      <div className="mx-auto max-w-7xl px-6 pb-14 pt-10 md:pb-16 md:pt-12">
+        <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
+          <div>
+            <div className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+              <MapIcon className="h-3.5 w-3.5 text-teal" />
+              The whole picture · one screen
+            </div>
+            <h2 className="mt-2 max-w-2xl text-2xl leading-snug md:text-3xl">
+              The Citizen Development strategy and operating model, at a glance.
+            </h2>
+            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+              Nine connected areas. Click any one to open its detail — the overview stays your anchor.
+            </p>
+          </div>
+          <div className="hidden items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground md:flex">
+            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-teal" />Direction</span>
+            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-charcoal" />Operating model</span>
+            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60" />Enablement</span>
+          </div>
+        </div>
+
+        <motion.div
+          layout
+          className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {STRATEGY_NODES.map((s, i) => {
+            const Icon = s.icon;
+            return (
+              <motion.button
+                key={s.id}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: i * 0.025 }}
+                whileHover={{ y: -2 }}
+                onClick={() => onSelect(s.target)}
+                className={cn(
+                  "group relative flex h-full flex-col gap-3 rounded-2xl border p-5 text-left transition-shadow hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                  s.accent
+                    ? "border-teal/40 bg-card shadow-soft"
+                    : "border-hairline bg-card",
+                )}
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={cn(
+                      "inline-flex h-9 w-9 items-center justify-center rounded-lg",
+                      s.accent ? "bg-teal-soft text-teal" : "bg-surface text-charcoal",
+                    )}
+                  >
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <span className={cn("text-[10px] font-medium uppercase tracking-[0.14em]", BAND_STYLE[s.band])}>
+                    {s.band}
+                  </span>
+                </div>
+                <div>
+                  <h3 className="text-base leading-snug">{s.title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
+                </div>
+                <div className="mt-auto flex items-center justify-between border-t border-hairline pt-3 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
+                  <span>{s.target.kind === "node" ? "Open detail" : "Jump to section"}</span>
+                  <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal" />
+                </div>
+              </motion.button>
+            );
+          })}
+        </motion.div>
+
+        <p className="mt-8 max-w-3xl text-xs leading-relaxed text-muted-foreground">
+          The platform experience sits inside <span className="text-foreground">Build Experience</span> and{" "}
+          <span className="text-foreground">Support & Community</span> — one enabler within the broader strategy. The AI factory, central AI consultants and the citizen developer community each contribute across these areas.
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function BackToOverview() {
+  const [visible, setVisible] = useState(false);
+  if (typeof window !== "undefined") {
+    // attach listener once
+  }
+  // Use effect via inline pattern
+  return (
+    <BackToOverviewInner visible={visible} setVisible={setVisible} />
+  );
+}
+
+function BackToOverviewInner({
+  visible,
+  setVisible,
+}: {
+  visible: boolean;
+  setVisible: (v: boolean) => void;
+}) {
+  // Listen to scroll
+  if (typeof window !== "undefined") {
+    // no-op placeholder; logic handled by useEffect below via separate hook
+  }
+  return (
+    <ScrollWatcher onChange={setVisible}>
+      <AnimatePresence>
+        {visible && (
+          <motion.a
+            href="#overview"
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-6 right-6 z-30 inline-flex items-center gap-2 rounded-full border border-hairline bg-card/95 px-4 py-2 text-xs font-medium shadow-lift backdrop-blur transition-colors hover:border-teal/40 hover:text-teal"
+          >
+            <ArrowUp className="h-3.5 w-3.5 text-teal" />
+            Back to model
+          </motion.a>
+        )}
+      </AnimatePresence>
+    </ScrollWatcher>
+  );
+}
+
+function ScrollWatcher({
+  onChange,
+  children,
+}: {
+  onChange: (v: boolean) => void;
+  children: React.ReactNode;
+}) {
+  useScrollPastOverview(onChange);
+  return <>{children}</>;
+}
+
+function useScrollPastOverview(onChange: (v: boolean) => void) {
+  if (typeof window === "undefined") return;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffectOnce(() => {
+    const handler = () => {
+      const el = document.getElementById("overview");
+      if (!el) return;
+      const bottom = el.getBoundingClientRect().bottom;
+      onChange(bottom < 0);
+    };
+    handler();
+    window.addEventListener("scroll", handler, { passive: true });
+    return () => window.removeEventListener("scroll", handler);
+  });
+}
+
+function useEffectOnce(fn: () => void | (() => void)) {
+  // local effect helper to keep imports tight
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const ref = (typeof window !== "undefined") ? (window as unknown as { __soRef?: boolean }) : undefined;
+  // Actually use React.useEffect properly:
+  React.useEffect(() => {
+    const cleanup = fn();
+    return cleanup;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  void ref;
+}
+
 function PhaseToggle({ phase, setPhase }: { phase: PhaseKey; setPhase: (p: PhaseKey) => void }) {
   return (
     <div className="inline-flex items-center gap-1 rounded-full border border-hairline bg-card p-1 shadow-soft">
