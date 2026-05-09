@@ -655,10 +655,103 @@ function DetailPanel({
                 <p className="mt-2 text-base leading-relaxed">{node.practice}</p>
               </section>
 
-              <section>
-                <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                  Who is involved
-                </h4>
+              {node.rubric && node.paths && (
+                <section className="rounded-xl border border-charcoal/15 bg-charcoal/[0.03] p-5">
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-teal">
+                    Decision rubric
+                  </h4>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Four short questions. The pattern of answers points to the likely path.
+                  </p>
+                  <ul className="mt-4 space-y-3">
+                    {node.rubric.map((r) => (
+                      <li key={r.q} className="rounded-lg border border-hairline bg-card p-3">
+                        <div className="text-sm font-medium">{r.q}</div>
+                        <div className="mt-2 grid gap-1.5 text-xs sm:grid-cols-3">
+                          <div><span className="font-medium text-teal">Reuse</span> · <span className="text-muted-foreground">{r.signals.reuse}</span></div>
+                          <div><span className="font-medium text-foreground">Build</span> · <span className="text-muted-foreground">{r.signals.build}</span></div>
+                          <div><span className="font-medium text-charcoal">Route</span> · <span className="text-muted-foreground">{r.signals.route}</span></div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-5">
+                    <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                      Likely path
+                    </div>
+                    <div className="mt-2 grid gap-2 sm:grid-cols-3">
+                      {node.paths.map((p) => (
+                        <div key={p.key} className="rounded-lg border border-hairline bg-card p-3">
+                          <div className={cn(
+                            "text-xs font-semibold uppercase tracking-wider",
+                            p.key === "Reuse" ? "text-teal" : p.key === "Route" ? "text-charcoal" : "text-foreground",
+                          )}>{p.key}</div>
+                          <div className="mt-1 text-xs leading-relaxed text-muted-foreground">{p.when}</div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {node.boundary && (
+                <section>
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    Where the boundary sits
+                  </h4>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    {node.boundary.map((b) => (
+                      <div key={b.role} className="rounded-lg border border-hairline bg-surface p-4">
+                        <div className="text-sm font-medium">{b.role}</div>
+                        <div className="mt-1.5 text-xs leading-relaxed">{b.does}</div>
+                        <div className="mt-2 text-[11px] uppercase tracking-wider text-teal">When</div>
+                        <div className="text-xs text-muted-foreground">{b.when}</div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {node.tiers && (
+                <section>
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    Support tiers
+                  </h4>
+                  <ol className="mt-3 space-y-2">
+                    {node.tiers.map((t, i) => (
+                      <li key={t.tier} className="flex items-start gap-3 rounded-lg border border-hairline bg-surface p-3">
+                        <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-teal/40 bg-card text-[11px] font-medium text-teal">
+                          {i + 1}
+                        </span>
+                        <div>
+                          <div className="text-sm font-medium">{t.tier}</div>
+                          <div className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{t.what}</div>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="mt-2 text-[11px] text-muted-foreground">
+                    Self-service → community → enablement team → AI factory technical escalation.
+                  </p>
+                </section>
+              )}
+
+              {node.community && (
+                <section>
+                  <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                    How knowledge travels
+                  </h4>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                    {node.community.map((c) => (
+                      <div key={c.label} className="rounded-lg border border-hairline bg-surface p-3">
+                        <div className="text-sm font-medium">{c.label}</div>
+                        <div className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{c.what}</div>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {node.involved.map((p) => (
                     <li
