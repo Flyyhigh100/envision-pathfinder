@@ -1140,11 +1140,12 @@ function Index() {
 
           {/* Phase summary card */}
           <motion.div
+            id="roadmap"
             key={phase}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mt-14 grid gap-4 rounded-2xl border border-hairline bg-card p-6 shadow-soft md:grid-cols-[auto_1fr_auto] md:items-center md:gap-8 md:p-8"
+            className="mt-14 scroll-mt-20 grid gap-4 rounded-2xl border border-hairline bg-card p-6 shadow-soft md:grid-cols-[auto_1fr_auto] md:items-center md:gap-8 md:p-8"
           >
             <div>
               <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
