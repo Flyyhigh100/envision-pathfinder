@@ -609,7 +609,7 @@ function StrategyOverview({
             This is a visual expression of the Citizen Development Strategy, the operating model that supports it, and the platform experience that enables it.
           </p>
           <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground/80">
-            One role family — the AI citizen developer — with two organisational homes: inside product lines, and on the central team. One way of working, shared across the network.
+            One role family — the AI citizen developer — with two organisational homes: inside product lines, and on the central team. One shared way of working. Work routes by fit and capacity, not by default to any one team.
           </p>
         </div>
 
