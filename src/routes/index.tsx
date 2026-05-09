@@ -56,10 +56,13 @@ const PHASES: Record<
   },
 };
 
+// One role family — AI citizen developer — with two organisational homes.
+// `citizen` = product line AI citizen developer.
+// `consultant` = central team AI citizen developer.
 const ROLES: Record<RoleKey, { label: string; short: string }> = {
   business: { label: "Business User", short: "Business" },
-  citizen: { label: "Citizen Developer", short: "Citizen Dev" },
-  consultant: { label: "Central AI Consultant", short: "AI Consultant" },
+  citizen: { label: "Product line AI citizen developer", short: "Product line" },
+  consultant: { label: "Central team AI citizen developer", short: "Central team" },
   governance: { label: "Data & Governance", short: "Governance" },
   factory: { label: "AI Factory", short: "AI Factory" },
 };
