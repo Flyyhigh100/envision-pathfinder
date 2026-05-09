@@ -574,7 +574,10 @@ function StrategyOverview({
             <h2 className="mt-2 max-w-2xl text-2xl leading-snug md:text-3xl">
               The Citizen Development strategy and operating model, at a glance.
             </h2>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
+              This is a visual expression of the Citizen Development Strategy, the operating model that supports it, and the platform experience that enables it.
+            </p>
+            <p className="mt-2 max-w-2xl text-sm text-muted-foreground/80">
               Nine connected areas. Click any one to open its detail — the overview stays your anchor.
             </p>
           </div>
