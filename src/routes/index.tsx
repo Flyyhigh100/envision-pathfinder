@@ -145,10 +145,11 @@ const NODES: Node[] = [
     title: "Build · Reuse · Route",
     group: "delivery",
     icon: GitBranch,
+    spine: true,
     definition: "The decision on how an idea becomes a working solution: build it, reuse something, or route it on.",
-    why: "Treating every idea as a fresh build is the fastest way to fragment the estate. Reuse and routing protect both speed and coherence.",
+    why: "This is the spine of the model. Treating every idea as a fresh build fragments the estate; refusing to build kills momentum. The call made here shapes everything downstream.",
     practice:
-      "Four clear paths: build it locally, reuse an existing solution with light tailoring, route to a product line that already owns the space, or escalate to the AI factory.",
+      "A short rubric is applied in shaping. The output is a recommended path — Reuse, Build, or Route — with the reasoning visible.",
     involved: ["Citizen developer", "Central AI consultant", "Product line owner", "AI factory (when escalated)"],
     current:
       "Decision made in shaping. Reuse encouraged but mostly word-of-mouth. Routing relies on known relationships.",
@@ -164,6 +165,33 @@ const NODES: Node[] = [
       governance: "Routing decisions are recorded and reviewable.",
       factory: "Escalations arrive shaped and justified, not raw.",
     },
+    rubric: [
+      {
+        q: "Is there already a solution that could be reused?",
+        signals: { reuse: "Yes, with light tailoring", build: "Close but materially different", route: "Yes, owned by another product line" },
+      },
+      {
+        q: "Does the use case touch sensitive or governed data?",
+        signals: { reuse: "Approved pattern exists", build: "Standard data only", route: "Needs enterprise-grade controls" },
+      },
+      {
+        q: "Is the audience local or enterprise-wide?",
+        signals: { reuse: "Local, similar to existing users", build: "Local team or function", route: "Cross-business or critical" },
+      },
+      {
+        q: "Is the effort small and local, or complex and strategic?",
+        signals: { reuse: "Small tailoring", build: "Small to medium, well-shaped", route: "Complex, strategic, or load-bearing" },
+      },
+    ],
+    paths: [
+      { key: "Reuse", when: "An existing solution covers most of the need. Tailor lightly, credit the original, log the avoided build." },
+      { key: "Build", when: "Local scope, standard data, citizen-developer-sized. Shape it, build it, register it." },
+      { key: "Route", when: "Sensitive data, enterprise scale, or strategic dependency. Hand to a product line or escalate to the AI factory." },
+    ],
+    boundary: [
+      { role: "Central AI consultant", does: "Shapes the idea, applies the rubric, recommends the path. Coaches citizen developers through build and reuse.", when: "Every idea passes through here." },
+      { role: "AI factory", does: "Owns enterprise-grade builds: production data, scaled audiences, complex integrations, load-bearing systems.", when: "Triggered by sensitivity, scale, complexity, or strategic weight — not by ambition alone." },
+    ],
   },
   {
     id: "portfolio",
