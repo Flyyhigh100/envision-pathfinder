@@ -256,25 +256,31 @@ const NODES: Node[] = [
     title: "Training & Enablement",
     group: "scale",
     icon: GraduationCap,
-    definition: "How more people become safely capable of building useful AI solutions.",
-    why: "Scale comes from more capable hands, not more central capacity. Enablement is the multiplier.",
+    definition: "The full support model that lets more people build safely — not just training.",
+    why: "Scale comes from more capable hands and a place to turn when stuck. Courses alone don't deliver that.",
     practice:
-      "A short onboarding path, office hours each week, paired-build sessions, and a small library of patterns that work.",
-    involved: ["Central AI consultant", "Citizen developers", "Data & governance"],
+      "A platform provided and evolved by the AI factory, sitting under a layered support model: self-service, community, enablement team, and technical escalation when needed.",
+    involved: ["AI factory (platform)", "Central AI consultant", "Citizen developers", "Data & governance"],
     current:
-      "Onboarding session, weekly office hours, a starter pattern library. Personal coaching where it matters most.",
+      "Citizen development platform in place. Office hours, a Teams community, starter playbooks and an AI buddy assistant. Technical escalation path defined.",
     future: {
-      next: "Role-based learning paths. Certified citizen developers. Pattern library kept current by the community.",
+      next: "Role-based learning paths. Certified citizen developers. Playbooks kept current by the community. AI buddy guides more of the build.",
       north:
-        "Enablement embedded in product lines. New joiners productive in weeks, not quarters.",
+        "Enablement embedded in product lines. Self-service handles the common case; escalation is rare and clean.",
     },
     audience: {
       business: "Help when you need it, not a six-week course you don't have time for.",
-      citizen: "A real path from first build to confident contributor.",
+      citizen: "A real path from first build to confident contributor — with backup when you hit a wall.",
       consultant: "Your time spent on shaping, not repeating the basics.",
       governance: "Builders who understand the boundaries before they hit them.",
-      factory: "A pipeline of capable people you can collaborate with.",
+      factory: "A platform you own, a community that uses it well, and a clean path for the issues that need you.",
     },
+    tiers: [
+      { tier: "Self-service", what: "Citizen development platform, playbooks, examples, AI buddy / guided assistant." },
+      { tier: "Community", what: "Teams forum, peer help, monthly show-and-tell." },
+      { tier: "Enablement team", what: "Office hours, paired-build sessions, coaching from the central AI consultant." },
+      { tier: "Technical escalation", what: "AI factory engineering support for issues beyond normal citizen developer help." },
+    ],
   },
   {
     id: "governance",
