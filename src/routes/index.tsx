@@ -549,9 +549,9 @@ const STRATEGY_NODES: StrategyNode[] = [
   },
   {
     id: "build",
-    title: "Build Experience",
+    title: "Build · Reuse · Route",
     band: "Operating model",
-    summary: "The spine: build locally, reuse what exists, or route to the AI factory. One clear decision.",
+    summary: "The spine: work flows to its most natural home — product line first when the fit is clear, central when it isn't.",
     icon: Library,
     target: { kind: "node", nodeId: "route" },
     accent: true,
