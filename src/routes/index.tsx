@@ -154,7 +154,7 @@ const NODES: Node[] = [
     icon: GitBranch,
     spine: true,
     definition: "How an idea becomes a working solution: build it, reuse something, or route it on — to its most natural home in the network.",
-    why: "This is the spine of the model. Treating every idea as a fresh build fragments the estate; refusing to build kills momentum. Routing is dynamic: work flows to the closest fit by domain, skill and capacity — product line first when the home is clear, central team when it isn't, with mutual support either way.",
+    why: "This is the spine of the model. Treating every idea as a fresh build fragments the estate; refusing to build kills momentum. Routing is dynamic and goes to whoever is best placed — judged by origin, skill and available capacity. Not always upward, not always to the centre.",
     practice:
       "A short rubric is applied in shaping. The output is a recommended path — Reuse, Build, or Route — and the most natural owner. Reasoning is visible so the call can be challenged.",
     involved: ["Product line AI citizen developer", "Central team AI citizen developer", "Product line owner", "AI factory (when escalated)"],
