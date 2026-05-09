@@ -1245,13 +1245,21 @@ function Index() {
           <div className="flex items-end justify-between gap-6">
             <div>
               <div className="text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-                05 · Open questions & refinement areas
+                05 · Working document · open questions
               </div>
-              <h2 className="mt-2 text-3xl md:text-4xl">Where this draft is least confident.</h2>
+              <h2 className="mt-2 text-3xl md:text-4xl">A live list — push on it.</h2>
               <p className="mt-3 max-w-2xl text-muted-foreground">
-                These are the places to push on. They are open on purpose — bringing opinions
-                here is the point of the conversation.
+                These questions are open on purpose. Each is tagged so it's clear what kind of
+                input is needed: someone to own it, a policy call, a design choice, or an
+                assumption to validate. Bring an opinion — that is the point of the conversation.
               </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                {(["Ownership TBD", "Policy Needed", "Design Decision", "Operating Assumption"] as QuestionTag[]).map((t) => (
+                  <span key={t} className={cn("inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-wider", QUESTION_TAG_STYLE[t])}>
+                    {t}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -1264,11 +1272,11 @@ function Index() {
                 <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-hairline bg-surface font-mono text-xs text-teal">
                   Q{i + 1}
                 </span>
-                <div>
-                  <div className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+                <div className="min-w-0">
+                  <span className={cn("inline-flex items-center rounded-full border px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider", QUESTION_TAG_STYLE[q.tag])}>
                     {q.tag}
-                  </div>
-                  <p className="mt-1 text-base leading-relaxed">{q.q}</p>
+                  </span>
+                  <p className="mt-2 text-base leading-relaxed">{q.q}</p>
                 </div>
               </div>
             ))}
