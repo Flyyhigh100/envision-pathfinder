@@ -453,6 +453,105 @@ const QUESTION_TAG_STYLE: Record<QuestionTag, string> = {
   "Operating Assumption": "border-hairline bg-card text-muted-foreground",
 };
 
+// --- Strategy overview -----------------------------------------------------
+
+type StrategyTarget =
+  | { kind: "node"; nodeId: NodeId }
+  | { kind: "anchor"; anchor: string };
+
+type StrategyNode = {
+  id: string;
+  title: string;
+  band: "Direction" | "Operating model" | "Enablement";
+  summary: string;
+  icon: typeof Compass;
+  target: StrategyTarget;
+  accent?: boolean;
+};
+
+const STRATEGY_NODES: StrategyNode[] = [
+  {
+    id: "vision",
+    title: "Vision · Why it matters",
+    band: "Direction",
+    summary: "Make AI citizen development easy, governed and scalable so more people can turn ideas into working solutions.",
+    icon: Eye,
+    target: { kind: "anchor", anchor: "vision" },
+    accent: true,
+  },
+  {
+    id: "roadmap",
+    title: "Strategy & Roadmap",
+    band: "Direction",
+    summary: "A clear arc — Now, Next, North Star — that sets pace without locking in the answer.",
+    icon: Compass,
+    target: { kind: "anchor", anchor: "roadmap" },
+  },
+  {
+    id: "training",
+    title: "Training & Enablement",
+    band: "Enablement",
+    summary: "Tiered support that grows people from curious user to confident citizen builder.",
+    icon: GraduationCap,
+    target: { kind: "node", nodeId: "training" },
+  },
+  {
+    id: "intake",
+    title: "Opportunity Intake",
+    band: "Operating model",
+    summary: "One front door for every AI idea, acknowledged in days, never lost in inboxes.",
+    icon: Inbox,
+    target: { kind: "node", nodeId: "intake" },
+  },
+  {
+    id: "assessment",
+    title: "Assessment & Routing",
+    band: "Operating model",
+    summary: "A short, honest shaping conversation against a small rubric — value, data, audience, reuse.",
+    icon: GitBranch,
+    target: { kind: "node", nodeId: "assessment" },
+  },
+  {
+    id: "build",
+    title: "Build Experience",
+    band: "Operating model",
+    summary: "The spine: build locally, reuse what exists, or route to the AI factory. One clear decision.",
+    icon: Library,
+    target: { kind: "node", nodeId: "route" },
+    accent: true,
+  },
+  {
+    id: "governance",
+    title: "Governance & Boundaries",
+    band: "Operating model",
+    summary: "Guardrails that travel with the work — sized to risk, not bolted on at the end.",
+    icon: ShieldCheck,
+    target: { kind: "node", nodeId: "governance" },
+  },
+  {
+    id: "value",
+    title: "Value Tracking",
+    band: "Operating model",
+    summary: "Light, honest signals of what the work is worth. Enough to learn, not enough to drown in.",
+    icon: TrendingUp,
+    target: { kind: "node", nodeId: "value" },
+  },
+  {
+    id: "community",
+    title: "Support & Community",
+    band: "Enablement",
+    summary: "A living portfolio, office hours and a working library — knowledge that travels between teams.",
+    icon: Users,
+    target: { kind: "node", nodeId: "portfolio" },
+  },
+];
+
+const BAND_STYLE: Record<StrategyNode["band"], string> = {
+  Direction: "text-teal",
+  "Operating model": "text-charcoal",
+  Enablement: "text-muted-foreground",
+};
+
 // --- Components ------------------------------------------------------------
 
 function PhaseToggle({ phase, setPhase }: { phase: PhaseKey; setPhase: (p: PhaseKey) => void }) {
