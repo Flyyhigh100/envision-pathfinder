@@ -56,10 +56,13 @@ const PHASES: Record<
   },
 };
 
+// One role family — AI citizen developer — with two organisational homes.
+// `citizen` = product line AI citizen developer.
+// `consultant` = central team AI citizen developer.
 const ROLES: Record<RoleKey, { label: string; short: string }> = {
   business: { label: "Business User", short: "Business" },
-  citizen: { label: "Citizen Developer", short: "Citizen Dev" },
-  consultant: { label: "Central AI Consultant", short: "AI Consultant" },
+  citizen: { label: "Product line AI citizen developer", short: "Product line" },
+  consultant: { label: "Central team AI citizen developer", short: "Central team" },
   governance: { label: "Data & Governance", short: "Governance" },
   factory: { label: "AI Factory", short: "AI Factory" },
 };
@@ -99,24 +102,24 @@ const NODES: Node[] = [
     title: "Idea Intake",
     group: "intake",
     icon: Inbox,
-    definition: "A single, low-friction front door for any AI idea, from anyone in the business.",
-    why: "Without one entry point, ideas get lost, duplicated or quietly built in shadow. A clear intake makes the pipeline visible.",
+    definition: "A shared, low-friction front door for any AI idea — visible to the whole network, not owned by one team.",
+    why: "Without a shared view of demand, ideas get lost, duplicated, or quietly built in shadow. One visible intake lets work route to its most natural home — a product line where the fit is strongest, or the central team when no clear home exists.",
     practice:
-      "Anyone submits an idea in a few short fields. It is acknowledged within days, not weeks, and routed to the right next step.",
-    involved: ["Business user", "Central AI consultant"],
+      "Anyone submits an idea in a few short fields. It is acknowledged within days and routed to the closest fit — product line first when the domain matches, central team when it doesn't, with mutual support either way.",
+    involved: ["Business user", "Product line AI citizen developer", "Central team AI citizen developer"],
     current:
-      "A simple form plus a triage call each week. Light tagging by domain, data sensitivity and effort.",
+      "A simple form plus a weekly triage shared between central team and product line representatives. Light tagging by domain, data sensitivity and effort.",
     future: {
-      next: "Intake feeds a shared backlog. Patterns are tagged automatically. Submitters can see status.",
+      next: "Intake feeds a shared backlog visible across product lines and the central team. Submitters can see status and who's picking it up.",
       north:
-        "Conversational intake that suggests reuse, surfaces similar live solutions and proposes a shaped next step.",
+        "Conversational intake suggests reuse, surfaces similar live solutions, and proposes the most natural owner — product line or central — based on fit and capacity.",
     },
     audience: {
-      business: "One place to bring an idea. You don't need to know who owns what.",
-      citizen: "Visibility into what's already in flight before you start building.",
-      consultant: "Demand is legible. Triage replaces ad-hoc requests.",
+      business: "One place to bring an idea. You don't need to know who owns what — the network finds the right home.",
+      citizen: "Visibility into ideas in your domain before they're built elsewhere — and a chance to pick them up.",
+      consultant: "Demand is legible across the network. Triage is shared, not centralised.",
       governance: "Sensitive ideas surface early, not after a build.",
-      factory: "A clean signal of where complex work is forming.",
+      factory: "A clean signal of where complex work is forming, regardless of who first received it.",
     },
   },
   {
@@ -124,22 +127,22 @@ const NODES: Node[] = [
     title: "Opportunity Assessment",
     group: "shaping",
     icon: Gauge,
-    definition: "A short, repeatable shaping step that decides what an idea actually is.",
-    why: "Most ideas are not what they first look like. A few targeted questions prevent wasted builds and misrouted work.",
+    definition: "A short, repeatable shaping step that decides what an idea actually is — and where it most naturally belongs.",
+    why: "Most ideas are not what they first look like. A few targeted questions prevent wasted builds and point each idea to its best home in the network.",
     practice:
-      "A 30-minute shaping conversation against a small rubric: value, complexity, data sensitivity, audience, reuse potential.",
-    involved: ["Central AI consultant", "Submitter", "Citizen developer (when relevant)"],
+      "A 30-minute shaping conversation against a small rubric: value, complexity, data sensitivity, audience, reuse potential, and natural domain home. Run by whichever AI citizen developer — product line or central — is the closest fit.",
+    involved: ["Product line AI citizen developer", "Central team AI citizen developer", "Submitter"],
     current:
-      "A one-page rubric. Two consultants triage together. Output is a recommendation, not a verdict.",
+      "A one-page rubric. Shaping is run by the closest available AI citizen developer, with peer review across the network. Output is a recommendation, not a verdict.",
     future: {
-      next: "Rubric is embedded in intake. Common patterns auto-suggest a recommendation for human review.",
+      next: "Rubric is embedded in intake. Common patterns auto-suggest a recommendation and a likely home for human review.",
       north:
-        "Shaping draws on portfolio history. The model learns which assessments held up and which didn't.",
+        "Shaping draws on portfolio history across product lines and central. The model learns which assessments held up and which didn't.",
     },
     audience: {
       business: "A quick, honest read on whether this is worth building and how.",
-      citizen: "Clear scope before you commit time.",
-      consultant: "Your judgement, applied consistently and visibly.",
+      citizen: "Clear scope before you commit time — and the chance to take ideas in your domain early.",
+      consultant: "Shared judgement, applied consistently across the network — not centralised gatekeeping.",
       governance: "Risk is named at the start, not discovered late.",
       factory: "Only the work that genuinely needs you reaches you.",
     },
@@ -150,22 +153,22 @@ const NODES: Node[] = [
     group: "delivery",
     icon: GitBranch,
     spine: true,
-    definition: "The decision on how an idea becomes a working solution: build it, reuse something, or route it on.",
-    why: "This is the spine of the model. Treating every idea as a fresh build fragments the estate; refusing to build kills momentum. The call made here shapes everything downstream.",
+    definition: "How an idea becomes a working solution: build it, reuse something, or route it on — to its most natural home in the network.",
+    why: "This is the spine of the model. Treating every idea as a fresh build fragments the estate; refusing to build kills momentum. Routing is dynamic: work flows to the closest fit by domain, skill and capacity — product line first when the home is clear, central team when it isn't, with mutual support either way.",
     practice:
-      "A short rubric is applied in shaping. The output is a recommended path — Reuse, Build, or Route — with the reasoning visible.",
-    involved: ["Citizen developer", "Central AI consultant", "Product line owner", "AI factory (when escalated)"],
+      "A short rubric is applied in shaping. The output is a recommended path — Reuse, Build, or Route — and the most natural owner. Reasoning is visible so the call can be challenged.",
+    involved: ["Product line AI citizen developer", "Central team AI citizen developer", "Product line owner", "AI factory (when escalated)"],
     current:
-      "Decision made in shaping. Reuse encouraged but mostly word-of-mouth. Routing relies on known relationships.",
+      "Decision made in shaping. Reuse encouraged but mostly word-of-mouth. Routing relies on known relationships across product lines and central.",
     future: {
-      next: "Reuse-first by default. Product line catalogues are searchable. Routing has named owners.",
+      next: "Reuse-first by default. Product line catalogues are searchable. Routing has named owners and visible capacity signals — work flows both ways between product lines and central.",
       north:
-        "The model recommends a path with confidence. Handoffs are warm and tracked end to end.",
+        "The model recommends path and home with confidence. Handoffs are warm, tracked end to end, and just as likely to flow from central back into a product line as the other way around.",
     },
     audience: {
       business: "A clear answer on what happens next, and who owns it.",
-      citizen: "Permission to reuse, and credit for doing so.",
-      consultant: "A consistent way to make the call, defendable later.",
+      citizen: "First call on ideas in your domain — and a clean way to flex into central work when you have capacity.",
+      consultant: "Delivery, enablement and overflow — not just intake. Backed up by product line peers when load spikes.",
       governance: "Routing decisions are recorded and reviewable.",
       factory: "Escalations arrive shaped and justified, not raw.",
     },
@@ -183,17 +186,18 @@ const NODES: Node[] = [
         signals: { reuse: "Local, similar to existing users", build: "Local team or function", route: "Cross-business or critical" },
       },
       {
-        q: "Is the effort small and local, or complex and strategic?",
-        signals: { reuse: "Small tailoring", build: "Small to medium, well-shaped", route: "Complex, strategic, or load-bearing" },
+        q: "Where does this idea most naturally live?",
+        signals: { reuse: "A team already running similar work", build: "A product line with the right skill and capacity", route: "No clear product-line home — central team picks it up" },
       },
     ],
     paths: [
       { key: "Reuse", when: "An existing solution covers most of the need. Tailor lightly, credit the original, log the avoided build." },
-      { key: "Build", when: "Local scope, standard data, citizen-developer-sized. Shape it, build it, register it." },
-      { key: "Route", when: "Sensitive data, enterprise scale, or strategic dependency. Hand to a product line or escalate to the AI factory." },
+      { key: "Build", when: "Local scope, standard data, sized for an AI citizen developer. Built by whoever has the closest fit and the capacity — product line or central." },
+      { key: "Route", when: "Sensitive data, enterprise scale, or strategic dependency. Hand to the right home — another product line, central team, or escalate to the AI factory." },
     ],
     boundary: [
-      { role: "Central AI consultant", does: "Shapes the idea, applies the rubric, recommends the path. Coaches citizen developers through build and reuse.", when: "Every idea passes through here." },
+      { role: "Product line AI citizen developer", does: "Primary home for ideas originating in or fitting their domain. Builds, reuses, and supports the central team when capacity allows.", when: "When the idea has a clear product-line fit by origin, domain or skill." },
+      { role: "Central team AI citizen developer", does: "Primary home for ideas without a clear product-line owner. Also delivers, enables, absorbs overflow and builds shared capability.", when: "When no product line is the natural fit, or when a product line is at capacity." },
       { role: "AI factory", does: "Owns enterprise-grade builds: production data, scaled audiences, complex integrations, load-bearing systems.", when: "Triggered by sensitivity, scale, complexity, or strategic weight — not by ambition alone." },
     ],
   },
@@ -202,31 +206,31 @@ const NODES: Node[] = [
     title: "Portfolio & Community",
     group: "scale",
     icon: Library,
-    definition: "A living view of what's been built, by whom, and a community that keeps it useful.",
-    why: "A portfolio prevents reinvention. A community keeps it honest, current, and worth searching.",
+    definition: "A living view of what's been built, by whom, and a community that keeps it useful — across product lines and central.",
+    why: "A portfolio prevents reinvention. A community keeps it honest, current, and worth searching. Shared transparency means everyone can see who is working on what, where support is needed, and where capacity exists.",
     practice:
-      "Every solution is registered with owner, audience, status and a short demo. A monthly community session shares patterns and retires what isn't used.",
-    involved: ["Citizen developers", "Central AI consultant", "Product lines"],
+      "Every solution is registered with owner, audience, status and a short demo. A monthly community session — open to all AI citizen developers, product line and central — shares patterns and retires what isn't used.",
+    involved: ["Product line AI citizen developer", "Central team AI citizen developer", "Product lines"],
     current:
-      "A simple registry plus a monthly show-and-tell. Ownership of stale items reviewed quarterly.",
+      "A simple registry plus a monthly show-and-tell. Ownership of stale items reviewed quarterly. Capacity and load shared informally between product lines and central.",
     future: {
-      next: "Searchable catalogue with usage signals. Reuse paths from any entry. Recognised contributor roles.",
+      next: "Searchable catalogue with usage and capacity signals. Reuse paths from any entry. Recognised contributor roles across both organisational homes.",
       north:
-        "Portfolio is the default starting point for every new idea. Community is self-sustaining across product lines.",
+        "Portfolio is the default starting point for every new idea. The community is self-sustaining, with knowledge and capacity flowing freely between product lines and central.",
     },
     audience: {
       business: "A place to find what already exists before asking for something new.",
-      citizen: "Your work is seen, reused and credited.",
-      consultant: "A real artefact to point at, not a slide.",
+      citizen: "Your work is seen, reused and credited — alongside peers in central and other product lines.",
+      consultant: "A real artefact of the network's output, not a slide.",
       governance: "Visibility of the estate, including what to retire.",
       factory: "Patterns from the field inform what to industrialise.",
     },
     community: [
-      { label: "Teams community", what: "Open forum for questions, patterns and quick help between citizen developers." },
-      { label: "Weekly office hours", what: "Drop-in time with the central AI consultant — no booking, no agenda required." },
+      { label: "Teams community", what: "Open forum for questions, patterns and quick help across all AI citizen developers — product line and central." },
+      { label: "Weekly office hours", what: "Drop-in time hosted in rotation by central and product line AI citizen developers — no booking, no agenda required." },
       { label: "Shared examples library", what: "Real working solutions, with owner, audience and what they reused." },
       { label: "Reuse showcase", what: "Visible credit when a solution is picked up by another team." },
-      { label: "Monthly show-and-tell", what: "Short demos from builders. Patterns surface; stale items get retired." },
+      { label: "Monthly show-and-tell", what: "Short demos from builders across the network. Patterns surface; stale items get retired." },
       { label: "Visible learning loop", what: "What worked, what didn't, what changed in the rubric this quarter." },
     ],
   },
@@ -238,19 +242,19 @@ const NODES: Node[] = [
     definition: "A lightweight way to capture whether solutions are actually used and useful.",
     why: "Without any read on value, the programme cannot defend itself, prioritise, or learn. Heavy measurement, however, kills momentum.",
     practice:
-      "Each solution carries a one-line value hypothesis and a simple usage signal. Quarterly review groups solutions into kept, improved, retired.",
-    involved: ["Solution owner", "Central AI consultant", "Sponsor"],
+      "Each solution carries a one-line value hypothesis and a simple usage signal — captured by whoever owns it, product line or central. Quarterly review groups solutions into kept, improved, retired.",
+    involved: ["Solution owner", "Product line AI citizen developer", "Central team AI citizen developer", "Sponsor"],
     current:
       "Self-reported value note plus basic usage. Deliberately light to avoid theatre.",
     future: {
-      next: "Standard signals (usage, time saved, satisfaction) collected consistently. Quarterly portfolio read-out.",
+      next: "Standard signals (usage, time saved, satisfaction) collected consistently across product lines and central. Quarterly portfolio read-out.",
       north:
         "Value evidence informs funding and routing decisions. Stays proportionate — never a tax on small wins.",
     },
     audience: {
       business: "Confidence that what you sponsored is worth keeping.",
       citizen: "A simple way to show your work mattered.",
-      consultant: "Evidence to prioritise the next wave.",
+      consultant: "Evidence to prioritise the next wave across the network.",
       governance: "A basis to retire solutions that no longer earn their place.",
       factory: "Signal on which patterns deserve enterprise-grade investment.",
     },
@@ -260,30 +264,30 @@ const NODES: Node[] = [
     title: "Training & Enablement",
     group: "scale",
     icon: GraduationCap,
-    definition: "The full support model that lets more people build safely — not just training.",
-    why: "Scale comes from more capable hands and a place to turn when stuck. Courses alone don't deliver that.",
+    definition: "The shared support model that lets more people build safely — for AI citizen developers wherever they sit.",
+    why: "Scale comes from more capable hands and a place to turn when stuck. Both product line and central AI citizen developers need training, upskilling and support — they follow one common way of working, not two.",
     practice:
-      "A platform provided and evolved by the AI factory, sitting under a layered support model: self-service, community, enablement team, and technical escalation when needed.",
-    involved: ["AI factory (platform)", "Central AI consultant", "Citizen developers", "Data & governance"],
+      "A platform provided and evolved by the AI factory, sitting under a layered support model: self-service, community, enablement (drawn from across the network), and technical escalation when needed.",
+    involved: ["AI factory (platform)", "Central team AI citizen developer", "Product line AI citizen developer", "Data & governance"],
     current:
-      "Citizen development platform in place. Office hours, a Teams community, starter playbooks and an AI buddy assistant. Technical escalation path defined.",
+      "Citizen development platform in place. Office hours, a Teams community, starter playbooks and an AI buddy assistant. Technical escalation path defined. Training open to all AI citizen developers, regardless of where they sit.",
     future: {
-      next: "Role-based learning paths. Certified citizen developers. Playbooks kept current by the community. AI buddy guides more of the build.",
+      next: "Role-based learning paths shared across product lines and central. Certified AI citizen developers. Playbooks kept current by the community. AI buddy guides more of the build.",
       north:
-        "Enablement embedded in product lines. Self-service handles the common case; escalation is rare and clean.",
+        "Enablement embedded in product lines, supported by central. Self-service handles the common case; escalation is rare and clean.",
     },
     audience: {
       business: "Help when you need it, not a six-week course you don't have time for.",
-      citizen: "A real path from first build to confident contributor — with backup when you hit a wall.",
-      consultant: "Your time spent on shaping, not repeating the basics.",
+      citizen: "A real path from first build to confident contributor — same playbook as your central peers, with backup when you hit a wall.",
+      consultant: "Shared craft across the network — your time spent on shaping and coaching, not repeating the basics.",
       governance: "Builders who understand the boundaries before they hit them.",
       factory: "A platform you own, a community that uses it well, and a clean path for the issues that need you.",
     },
     tiers: [
       { tier: "Self-service", what: "Citizen development platform, playbooks, examples, AI buddy / guided assistant." },
-      { tier: "Community", what: "Teams forum, peer help, monthly show-and-tell." },
-      { tier: "Enablement team", what: "Office hours, paired-build sessions, coaching from the central AI consultant." },
-      { tier: "Technical escalation", what: "AI factory engineering support for issues beyond normal citizen developer help." },
+      { tier: "Community", what: "Teams forum, peer help across product lines and central, monthly show-and-tell." },
+      { tier: "Enablement", what: "Office hours, paired-build sessions and coaching — provided by central and senior product line AI citizen developers." },
+      { tier: "Technical escalation", what: "AI factory engineering support for issues beyond normal AI citizen developer help." },
     ],
   },
   {
@@ -291,11 +295,11 @@ const NODES: Node[] = [
     title: "Governance & Boundaries",
     group: "guardrails",
     icon: ShieldCheck,
-    definition: "The clear, lightweight rules that say what is safe to build where, and with which data.",
-    why: "Without boundaries, citizen development slows or breaks. With heavy ones, it never starts. The point is to make safe, fast.",
+    definition: "The clear, lightweight rules that say what is safe to build where, and with which data — applied the same way across the network.",
+    why: "Without boundaries, citizen development slows or breaks. With heavy ones, it never starts. The point is to make safe, fast — and the rules apply equally to product line and central builds.",
     practice:
-      "A short policy on data classes, allowed patterns, and review thresholds. Anything above the line goes through a defined review; anything below is encouraged.",
-    involved: ["Data & governance", "Central AI consultant", "AI factory (for escalations)"],
+      "A short policy on data classes, allowed patterns, and review thresholds. Anything above the line goes through a defined review; anything below is encouraged. Same rules, wherever the build happens.",
+    involved: ["Data & governance", "Central team AI citizen developer", "Product line AI citizen developer", "AI factory (for escalations)"],
     current:
       "A one-page policy. Defined thresholds for review. Sensitive data routes via approved patterns only.",
     future: {
@@ -305,8 +309,8 @@ const NODES: Node[] = [
     },
     audience: {
       business: "Confidence that what's encouraged is genuinely safe.",
-      citizen: "Clear lines so you can move fast inside them.",
-      consultant: "A defensible answer when shaping work.",
+      citizen: "Clear lines so you can move fast inside them — same lines as your central peers.",
+      consultant: "A defensible answer when shaping work, consistent across the network.",
       governance: "Proportionate control without becoming a bottleneck.",
       factory: "Clean handover for anything that needs enterprise-grade controls.",
     },
@@ -335,12 +339,28 @@ const SCENARIOS: Scenario[] = [
     path: ["intake", "assessment", "portfolio", "route"],
     start: "intake",
     outcome: "Reuse path proposed back to the executive within days, with a candid note on what it does and doesn't cover.",
-    involves: ["business", "consultant", "citizen"],
-    next: "If reuse is accepted, light tailoring by the owning team. If rejected with reason, build proceeds and the gap is logged.",
+    involves: ["business", "citizen", "consultant"],
+    next: "If reuse is accepted, light tailoring by the owning product line. If rejected with reason, build proceeds in the closest-fit team and the gap is logged.",
     reactions: {
-      now: "Match found in shaping. Consultant brokers the conversation between executive and owning team.",
+      now: "Match found in shaping. Whoever has the closest fit — product line or central — brokers the conversation with the executive and the owning team.",
       next: "Catalogue surfaces the match at intake. The reuse-vs-build call is made with evidence, not opinion.",
-      north: "Intake proposes the reusable solution before the request is even submitted formally.",
+      north: "Intake proposes the reusable solution and the most natural owner before the request is even submitted formally.",
+    },
+  },
+  {
+    id: "product-line-origin",
+    title: "An idea originates inside a product line — does it stay there?",
+    prompt: "A product line has a confident AI citizen developer and a clear domain fit. Capacity is the only question.",
+    tension: "Default to local ownership and momentum vs. quietly handing it to central because that's the old habit.",
+    path: ["intake", "assessment", "route"],
+    start: "intake",
+    outcome: "Stays with the product line as the primary build. Central team offers light support — review, pairing or overflow — only if asked.",
+    involves: ["business", "citizen", "consultant"],
+    next: "Build registered in the shared portfolio so it's visible and reusable across the network.",
+    reactions: {
+      now: "Quick confirmation in shaping that the product line owns it. Central is on call, not in the lead.",
+      next: "Capacity signals make support requests routine, not awkward. Help flows in whichever direction is needed.",
+      north: "Local ownership is the default for product-line-origin ideas. Central support is invisible until it's needed.",
     },
   },
   {
@@ -350,13 +370,29 @@ const SCENARIOS: Scenario[] = [
     tension: "Encourage the build vs. risk a sensitive-data exposure that lands later as a finding.",
     path: ["intake", "assessment", "governance", "route"],
     start: "intake",
-    outcome: "Governance reviewed in shaping. If a pre-approved pattern fits, build proceeds; if not, the use case is reshaped or routed.",
-    involves: ["business", "governance", "consultant", "citizen"],
+    outcome: "Governance reviewed in shaping. If a pre-approved pattern fits, build proceeds with the closest-fit AI citizen developer; if not, the use case is reshaped or routed.",
+    involves: ["business", "governance", "citizen", "consultant"],
     next: "Pattern (or its absence) is recorded so the next similar idea is faster — or honestly slower.",
     reactions: {
       now: "Governance joins the shaping call. Reshape is a real option, not a polite refusal.",
       next: "Pre-approved data patterns cover most cases. Review focuses on genuinely new ones.",
       north: "Platform makes the safe path the default; governance reviews exceptions, not every build.",
+    },
+  },
+  {
+    id: "central-overflow",
+    title: "Central team is at capacity — a product line can help",
+    prompt: "An idea has landed centrally with no clear product-line home, but a product line AI citizen developer has matching skill and spare capacity.",
+    tension: "Stick rigidly to where the idea first arrived vs. flex support across the network when it's the better answer.",
+    path: ["intake", "assessment", "route"],
+    start: "intake",
+    outcome: "Product line AI citizen developer picks it up, with the central team staying close on shaping and review.",
+    involves: ["consultant", "citizen", "business"],
+    next: "Outcome and pattern shared back so the next similar idea routes faster.",
+    reactions: {
+      now: "Informal ask between known peers. Capacity is checked by hand, decision recorded.",
+      next: "Visible capacity signals make the flex routine. Mutual support is the norm, not the exception.",
+      north: "Routing recommends the cross-team fit when it's the better answer — the network self-balances.",
     },
   },
   {
@@ -370,7 +406,7 @@ const SCENARIOS: Scenario[] = [
     involves: ["citizen", "consultant", "factory"],
     next: "If routed, the team stays close as a product owner — they don't disappear from their own idea.",
     reactions: {
-      now: "Consultant names the trade-off explicitly: what local build can carry, and what it can't.",
+      now: "Whoever shapes the idea names the trade-off explicitly: what local build can carry, and what it can't.",
       next: "Defined thresholds make this conversation faster and less personal.",
       north: "Most ideas have an obvious home; the boundary cases are rare and well-handled.",
     },
@@ -382,11 +418,11 @@ const SCENARIOS: Scenario[] = [
     tension: "Reuse protects coherence but borrows someone else's roadmap. Rebuild is faster locally but fragments the estate.",
     path: ["intake", "assessment", "portfolio", "route"],
     start: "intake",
-    outcome: "Three honest options put on the table: reuse-as-is, sponsor a small extension on the existing tool, or build with a stated end-of-life if the original catches up.",
-    involves: ["business", "consultant", "citizen"],
+    outcome: "Three honest options on the table: reuse-as-is, sponsor a small extension on the existing tool, or build with a stated end-of-life if the original catches up.",
+    involves: ["business", "citizen", "consultant"],
     next: "Whichever path is chosen, the decision and reasoning are recorded in the portfolio.",
     reactions: {
-      now: "Brokered conversation between teams. Decision documented even if it's a rebuild.",
+      now: "Brokered conversation between the two product lines, with central facilitating only if needed.",
       next: "Catalogue shows usage and roadmap of the existing tool, making the call easier.",
       north: "Reuse, extension, and rebuild are first-class options — chosen, not defaulted into.",
     },
@@ -394,15 +430,15 @@ const SCENARIOS: Scenario[] = [
   {
     id: "escalate",
     title: "An idea is escalated to the AI factory — what triggers it, what happens next",
-    prompt: "Sensitivity, scale, complexity or strategic weight push the idea past the citizen line.",
+    prompt: "Sensitivity, scale, complexity or strategic weight push the idea past what AI citizen developers should carry.",
     tension: "Escalation must be earned, not aspirational. Too eager and the factory becomes a bottleneck; too reluctant and risk leaks into citizen builds.",
     path: ["intake", "assessment", "route", "governance"],
     start: "intake",
     outcome: "Escalated with a shaped brief: problem, value, constraints, what's been tried. Factory accepts, defers with reason, or sends back with a smaller scope to try first.",
-    involves: ["consultant", "factory", "governance"],
-    next: "Citizen community kept informed. Any interim solution is clearly marked as interim, not the answer.",
+    involves: ["citizen", "consultant", "factory", "governance"],
+    next: "Network kept informed across product lines and central. Any interim solution is clearly marked as interim, not the answer.",
     reactions: {
-      now: "Warm handover with a one-page brief. Triggers (sensitive data, scale, criticality) named explicitly.",
+      now: "Warm handover with a one-page brief — prepared by whoever shaped the idea. Triggers named explicitly.",
       next: "Defined escalation path with SLAs. Briefs follow a shared template; deferrals come with a reason.",
       north: "Continuous flow between citizen builds and factory programmes. Patterns travel in both directions.",
     },
@@ -513,9 +549,9 @@ const STRATEGY_NODES: StrategyNode[] = [
   },
   {
     id: "build",
-    title: "Build Experience",
+    title: "Build · Reuse · Route",
     band: "Operating model",
-    summary: "The spine: build locally, reuse what exists, or route to the AI factory. One clear decision.",
+    summary: "The spine: work flows to its most natural home — product line first when the fit is clear, central when it isn't.",
     icon: Library,
     target: { kind: "node", nodeId: "route" },
     accent: true,
@@ -571,6 +607,9 @@ function StrategyOverview({
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
             This is a visual expression of the Citizen Development Strategy, the operating model that supports it, and the platform experience that enables it.
+          </p>
+          <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground/80">
+            One role family — the AI citizen developer — with two organisational homes: inside product lines, and on the central team. One way of working, shared across the network.
           </p>
         </div>
 
@@ -1437,7 +1476,7 @@ function Index() {
               {
                 w: "Step 3",
                 t: "Build · reuse · route decision",
-                d: "Build it locally, reuse what exists, route to a product line, or escalate to the AI factory.",
+                d: "Build with the closest-fit AI citizen developer — product line first when the home is clear, central team when it isn't. Reuse what exists. Escalate to the AI factory when scale or sensitivity demands it.",
               },
               {
                 w: "Step 4",
