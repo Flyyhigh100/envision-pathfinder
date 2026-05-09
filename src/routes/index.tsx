@@ -752,6 +752,10 @@ function DetailPanel({
                 </section>
               )}
 
+              <section>
+                <h4 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground">
+                  Who is involved
+                </h4>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {node.involved.map((p) => (
                     <li
