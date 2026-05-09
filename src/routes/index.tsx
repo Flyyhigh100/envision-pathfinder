@@ -1476,7 +1476,7 @@ function Index() {
               {
                 w: "Step 3",
                 t: "Build · reuse · route decision",
-                d: "Build it locally, reuse what exists, route to a product line, or escalate to the AI factory.",
+                d: "Build with the closest-fit AI citizen developer — product line first when the home is clear, central team when it isn't. Reuse what exists. Escalate to the AI factory when scale or sensitivity demands it.",
               },
               {
                 w: "Step 4",
