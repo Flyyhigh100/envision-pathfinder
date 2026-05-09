@@ -562,83 +562,45 @@ function StrategyOverview({
   return (
     <section
       id="overview"
-      className="relative scroll-mt-20 border-b border-hairline bg-card/30"
+      className="relative scroll-mt-20 border-b border-hairline"
     >
-      <div className="mx-auto max-w-7xl px-6 pb-14 pt-10 md:pb-16 md:pt-12">
-        <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
-          <div>
-            <div className="inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
-              <MapIcon className="h-3.5 w-3.5 text-teal" />
-              The whole picture · one screen
-            </div>
-            <h2 className="mt-2 max-w-2xl text-2xl leading-snug md:text-3xl">
-              The Citizen Development strategy and operating model, at a glance.
-            </h2>
-            <p className="mt-3 max-w-2xl text-[15px] leading-relaxed text-muted-foreground">
-              This is a visual expression of the Citizen Development Strategy, the operating model that supports it, and the platform experience that enables it.
-            </p>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground/80">
-              Nine connected areas. Click any one to open its detail — the overview stays your anchor.
-            </p>
-          </div>
-          <div className="hidden items-center gap-2 text-[11px] uppercase tracking-[0.16em] text-muted-foreground md:flex">
-            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-teal" />Direction</span>
-            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-charcoal" />Operating model</span>
-            <span className="inline-flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-muted-foreground/60" />Enablement</span>
-          </div>
+      <div className="mx-auto max-w-6xl px-6 pb-20 pt-16 md:pb-24 md:pt-20">
+        <div className="max-w-2xl">
+          <h2 className="text-2xl leading-snug md:text-[28px]">
+            The strategy and operating model, at a glance.
+          </h2>
+          <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
+            This is a visual expression of the Citizen Development Strategy, the operating model that supports it, and the platform experience that enables it.
+          </p>
         </div>
 
         <motion.div
           layout
-          className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-12 grid gap-x-6 gap-y-6 sm:grid-cols-2 md:mt-16 lg:grid-cols-3"
         >
           {STRATEGY_NODES.map((s, i) => {
             const Icon = s.icon;
             return (
               <motion.button
                 key={s.id}
-                initial={{ opacity: 0, y: 8 }}
+                initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: i * 0.025 }}
-                whileHover={{ y: -2 }}
+                transition={{ duration: 0.35, delay: i * 0.02 }}
                 onClick={() => onSelect(s.target)}
-                className={cn(
-                  "group relative flex h-full flex-col gap-3 rounded-2xl border p-5 text-left transition-shadow hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                  s.accent
-                    ? "border-teal/40 bg-card shadow-soft"
-                    : "border-hairline bg-card",
-                )}
+                className="group relative flex h-full flex-col gap-4 rounded-xl border border-hairline bg-card p-6 text-left transition-colors hover:border-teal/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <div className="flex items-center justify-between">
-                  <span
-                    className={cn(
-                      "inline-flex h-9 w-9 items-center justify-center rounded-lg",
-                      s.accent ? "bg-teal-soft text-teal" : "bg-surface text-charcoal",
-                    )}
-                  >
-                    <Icon className="h-4 w-4" />
-                  </span>
-                  <span className={cn("text-[10px] font-medium uppercase tracking-[0.14em]", BAND_STYLE[s.band])}>
-                    {s.band}
-                  </span>
+                  <Icon className="h-4 w-4 text-charcoal/70 transition-colors group-hover:text-teal" />
+                  <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground/40 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-teal" />
                 </div>
                 <div>
-                  <h3 className="text-base leading-snug">{s.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{s.summary}</p>
-                </div>
-                <div className="mt-auto flex items-center justify-between border-t border-hairline pt-3 text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
-                  <span>{s.target.kind === "node" ? "Open detail" : "Jump to section"}</span>
-                  <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-teal" />
+                  <h3 className="text-[15px] font-medium leading-snug">{s.title}</h3>
+                  <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{s.summary}</p>
                 </div>
               </motion.button>
             );
           })}
         </motion.div>
-
-        <p className="mt-8 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-          The platform experience sits inside <span className="text-foreground">Build Experience</span> and{" "}
-          <span className="text-foreground">Support & Community</span> — one enabler within the broader strategy. The AI factory, central AI consultants and the citizen developer community each contribute across these areas.
-        </p>
       </div>
     </section>
   );
