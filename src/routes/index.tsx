@@ -81,6 +81,12 @@ type Node = {
   current: string;
   future: Record<Exclude<PhaseKey, "now">, string>;
   audience: Record<RoleKey, string>;
+  spine?: boolean;
+  rubric?: { q: string; signals: { reuse: string; build: string; route: string } }[];
+  paths?: { key: "Reuse" | "Build" | "Route"; when: string }[];
+  boundary?: { role: string; does: string; when: string }[];
+  tiers?: { tier: string; what: string }[];
+  community?: { label: string; what: string }[];
 };
 
 const NODES: Node[] = [
