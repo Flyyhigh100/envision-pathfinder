@@ -443,9 +443,9 @@ const OPEN_QUESTIONS: { q: string; tag: QuestionTag }[] = [
 ];
 
 const QUESTION_TAG_STYLE: Record<QuestionTag, string> = {
-  "Ownership TBD": "border-amber/40 bg-amber/10 text-amber-deep",
+  "Ownership TBD": "border-charcoal/30 bg-charcoal text-primary-foreground",
   "Policy Needed": "border-teal/40 bg-teal-soft text-teal",
-  "Design Decision": "border-charcoal/20 bg-surface text-charcoal",
+  "Design Decision": "border-hairline bg-surface text-foreground",
   "Operating Assumption": "border-hairline bg-card text-muted-foreground",
 };
 
