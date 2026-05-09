@@ -405,32 +405,49 @@ const SCENARIOS: Scenario[] = [
   },
 ];
 
-const OPEN_QUESTIONS = [
+type QuestionTag = "Ownership TBD" | "Policy Needed" | "Design Decision" | "Operating Assumption";
+
+const OPEN_QUESTIONS: { q: string; tag: QuestionTag }[] = [
   {
     q: "Where does ownership sit when a citizen build outgrows its original team?",
-    tag: "Ownership",
+    tag: "Ownership TBD",
   },
   {
     q: "How deep should governance go before it becomes a brake on momentum?",
-    tag: "Governance depth",
+    tag: "Policy Needed",
   },
   {
-    q: "What does training look like once demand outpaces central capacity?",
-    tag: "Training scale",
+    q: "What does enablement look like once demand outpaces central capacity?",
+    tag: "Design Decision",
   },
   {
-    q: "When does value tracking move from a one-line note to something more formal?",
-    tag: "Value tracking",
+    q: "When does value tracking move from a simple log to something more formal?",
+    tag: "Operating Assumption",
   },
   {
     q: "Who arbitrates when a product line and a citizen build claim the same space?",
-    tag: "Routing conflicts",
+    tag: "Ownership TBD",
   },
   {
     q: "What is the right trigger to escalate from citizen build to AI factory?",
-    tag: "Escalation",
+    tag: "Policy Needed",
+  },
+  {
+    q: "What is the right balance between platform standardisation and local flexibility?",
+    tag: "Design Decision",
+  },
+  {
+    q: "How much of intake volume is realistic to absorb in the first six months?",
+    tag: "Operating Assumption",
   },
 ];
+
+const QUESTION_TAG_STYLE: Record<QuestionTag, string> = {
+  "Ownership TBD": "border-amber/40 bg-amber/10 text-amber-deep",
+  "Policy Needed": "border-teal/40 bg-teal-soft text-teal",
+  "Design Decision": "border-charcoal/20 bg-surface text-charcoal",
+  "Operating Assumption": "border-hairline bg-card text-muted-foreground",
+};
 
 // --- Components ------------------------------------------------------------
 
