@@ -874,6 +874,11 @@ function Index() {
               <em className="not-italic">long term</em>. React, push back, refine.
             </p>
 
+            <p className="mt-5 max-w-2xl border-l-2 border-hairline pl-3 text-xs leading-relaxed text-muted-foreground">
+              This is not a final org design, governance policy, or technical architecture. It is
+              a proposed operating model to support alignment and refinement.
+            </p>
+
             <div className="mt-8 flex flex-wrap items-center gap-3 md:hidden">
               <RoleToggle role={role} setRole={setRole} />
               <PhaseToggle phase={phase} setPhase={setPhase} />
