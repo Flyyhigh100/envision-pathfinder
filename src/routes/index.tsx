@@ -1048,6 +1048,15 @@ function Index() {
     return idx === -1 ? null : idx + 1;
   };
 
+  const handleStrategySelect = (target: StrategyTarget) => {
+    if (target.kind === "node") {
+      setOpenId(target.nodeId);
+    } else if (typeof document !== "undefined") {
+      const el = document.getElementById(target.anchor);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Top bar */}
@@ -1063,14 +1072,23 @@ function Index() {
             </div>
           </div>
           <div className="hidden items-center gap-3 md:flex">
+            <a
+              href="#overview"
+              className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-teal"
+            >
+              Overview
+            </a>
             <RoleToggle role={role} setRole={setRole} />
             <PhaseToggle phase={phase} setPhase={setPhase} />
           </div>
         </div>
       </header>
 
+      {/* Strategy overview · front door */}
+      <StrategyOverview onSelect={handleStrategySelect} />
+
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section id="vision" className="relative scroll-mt-20 overflow-hidden">
         <div className="grid-bg absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black,transparent_70%)]" />
         <div className="relative mx-auto max-w-7xl px-6 pb-16 pt-20 md:pt-28">
           <motion.div
