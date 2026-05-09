@@ -608,6 +608,9 @@ function StrategyOverview({
           <p className="mt-4 text-[15px] leading-relaxed text-muted-foreground">
             This is a visual expression of the Citizen Development Strategy, the operating model that supports it, and the platform experience that enables it.
           </p>
+          <p className="mt-3 text-[13px] leading-relaxed text-muted-foreground/80">
+            One role family — the AI citizen developer — with two organisational homes: inside product lines, and on the central team. One way of working, shared across the network.
+          </p>
         </div>
 
         <motion.div
