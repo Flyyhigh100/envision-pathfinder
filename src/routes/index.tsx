@@ -536,10 +536,19 @@ function NodeCard({
       animate={{ opacity: dimmed ? 0.45 : 1 }}
       transition={{ type: "spring", stiffness: 300, damping: 24 }}
       className={cn(
-        "group relative flex h-full w-full flex-col gap-3 rounded-2xl border bg-card p-5 text-left shadow-soft transition-shadow hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        highlighted ? "border-teal/60 ring-1 ring-teal/30" : "border-hairline",
+        "group relative flex h-full w-full flex-col gap-3 rounded-2xl border p-5 text-left shadow-soft transition-shadow hover:shadow-lift focus:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        node.spine
+          ? "bg-charcoal text-primary-foreground border-charcoal shadow-lift"
+          : "bg-card",
+        highlighted && !node.spine ? "border-teal/60 ring-1 ring-teal/30" : "",
+        !highlighted && !node.spine ? "border-hairline" : "",
       )}
     >
+      {node.spine && (
+        <span className="absolute -top-2 right-4 inline-flex items-center gap-1 rounded-full bg-teal px-2 py-0.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-primary-foreground shadow-soft">
+          Spine of the model
+        </span>
+      )}
       {step !== null && (
         <span
           className={cn(
@@ -554,18 +563,23 @@ function NodeCard({
         <span
           className={cn(
             "inline-flex h-9 w-9 items-center justify-center rounded-lg",
-            highlighted ? "bg-teal-soft text-teal" : "bg-surface text-charcoal",
+            node.spine
+              ? "bg-teal text-primary-foreground"
+              : highlighted ? "bg-teal-soft text-teal" : "bg-surface text-charcoal",
           )}
         >
           <Icon className="h-4 w-4" />
         </span>
-        <span className="text-[10px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+        <span className={cn(
+          "text-[10px] font-medium uppercase tracking-[0.14em]",
+          node.spine ? "text-primary-foreground/60" : "text-muted-foreground",
+        )}>
           {node.group}
         </span>
       </div>
       <div>
-        <h3 className="text-lg leading-snug">{node.title}</h3>
-        <p className="mt-1 text-sm text-muted-foreground">{node.definition}</p>
+        <h3 className={cn("leading-snug", node.spine ? "text-xl" : "text-lg")}>{node.title}</h3>
+        <p className={cn("mt-1 text-sm", node.spine ? "text-primary-foreground/70" : "text-muted-foreground")}>{node.definition}</p>
       </div>
       <div className="mt-auto flex items-center justify-between gap-3 border-t border-hairline pt-3">
         <span className="text-xs text-muted-foreground line-clamp-2">
