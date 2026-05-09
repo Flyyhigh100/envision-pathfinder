@@ -934,6 +934,43 @@ function Index() {
               ))}
             </div>
           </motion.div>
+
+          {phase === "now" && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.05 }}
+              className="mt-4 grid gap-3 rounded-2xl border border-dashed border-hairline bg-card/60 p-5 md:grid-cols-3 md:p-6"
+            >
+              <div>
+                <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-teal">
+                  Grounding signal · not a commitment
+                </div>
+                <div className="mt-1.5 text-sm font-medium">Rough intake volume</div>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Plan for ~15–30 ideas per month in the first six months. Triage cadence sized to that, not to ambition.
+                </p>
+              </div>
+              <div className="border-t border-hairline pt-3 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+                <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                  Likely split
+                </div>
+                <div className="mt-1.5 text-sm font-medium">Built · Reused · Routed · Parked</div>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  Working assumption: roughly 35% built locally, 25% reused, 25% routed, 15% parked or reshaped. Calibrated each quarter.
+                </p>
+              </div>
+              <div className="border-t border-hairline pt-3 md:border-l md:border-t-0 md:pl-6 md:pt-0">
+                <div className="text-[10px] font-medium uppercase tracking-[0.16em] text-muted-foreground">
+                  Lightweight value tracking
+                </div>
+                <div className="mt-1.5 text-sm font-medium">Intake log · spreadsheet tagging · quarterly note</div>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                  A shared intake log, simple status and value tags in a spreadsheet, and a one-page quarterly read-out. No tooling project required.
+                </p>
+              </div>
+            </motion.div>
+          )}
         </div>
       </section>
 
