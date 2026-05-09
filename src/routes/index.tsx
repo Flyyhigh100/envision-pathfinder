@@ -102,24 +102,24 @@ const NODES: Node[] = [
     title: "Idea Intake",
     group: "intake",
     icon: Inbox,
-    definition: "A single, low-friction front door for any AI idea, from anyone in the business.",
-    why: "Without one entry point, ideas get lost, duplicated or quietly built in shadow. A clear intake makes the pipeline visible.",
+    definition: "A shared, low-friction front door for any AI idea — visible to the whole network, not owned by one team.",
+    why: "Without a shared view of demand, ideas get lost, duplicated, or quietly built in shadow. One visible intake lets work route to its most natural home — a product line where the fit is strongest, or the central team when no clear home exists.",
     practice:
-      "Anyone submits an idea in a few short fields. It is acknowledged within days, not weeks, and routed to the right next step.",
-    involved: ["Business user", "Central AI consultant"],
+      "Anyone submits an idea in a few short fields. It is acknowledged within days and routed to the closest fit — product line first when the domain matches, central team when it doesn't, with mutual support either way.",
+    involved: ["Business user", "Product line AI citizen developer", "Central team AI citizen developer"],
     current:
-      "A simple form plus a triage call each week. Light tagging by domain, data sensitivity and effort.",
+      "A simple form plus a weekly triage shared between central team and product line representatives. Light tagging by domain, data sensitivity and effort.",
     future: {
-      next: "Intake feeds a shared backlog. Patterns are tagged automatically. Submitters can see status.",
+      next: "Intake feeds a shared backlog visible across product lines and the central team. Submitters can see status and who's picking it up.",
       north:
-        "Conversational intake that suggests reuse, surfaces similar live solutions and proposes a shaped next step.",
+        "Conversational intake suggests reuse, surfaces similar live solutions, and proposes the most natural owner — product line or central — based on fit and capacity.",
     },
     audience: {
-      business: "One place to bring an idea. You don't need to know who owns what.",
-      citizen: "Visibility into what's already in flight before you start building.",
-      consultant: "Demand is legible. Triage replaces ad-hoc requests.",
+      business: "One place to bring an idea. You don't need to know who owns what — the network finds the right home.",
+      citizen: "Visibility into ideas in your domain before they're built elsewhere — and a chance to pick them up.",
+      consultant: "Demand is legible across the network. Triage is shared, not centralised.",
       governance: "Sensitive ideas surface early, not after a build.",
-      factory: "A clean signal of where complex work is forming.",
+      factory: "A clean signal of where complex work is forming, regardless of who first received it.",
     },
   },
   {
