@@ -1118,6 +1118,9 @@ function Index() {
         </div>
       </header>
 
+      {/* Strategy canvas · big-picture anchor */}
+      <StrategyCanvasHero onSelect={handleStrategySelect} />
+
       {/* Strategy overview · front door */}
       <StrategyOverview onSelect={handleStrategySelect} />
 
