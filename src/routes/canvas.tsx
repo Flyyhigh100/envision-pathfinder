@@ -310,7 +310,7 @@ function CanvasPage() {
 
           <Layer
             eyebrow="Layer 2 · Capability Network"
-            caption="One role family · two organisational homes. Training strengthens both."
+            caption="One role family in two homes. Training strengthens both."
           >
             <div className="grid gap-4 md:grid-cols-2">
               {NETWORK.map((t) => (
