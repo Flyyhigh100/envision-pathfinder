@@ -15,6 +15,8 @@ import {
   Building2,
   Network,
   ArrowRight,
+  Sparkles,
+  Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -107,14 +109,14 @@ const FLOW: Tile[] = [
   {
     id: "assessment",
     title: "Assessment & Routing",
-    blurb: "A short, honest shaping conversation against a small rubric.",
+    blurb: "A short, honest check to decide the best path forward.",
     icon: GitBranch,
     target: { kind: "node", nodeId: "assessment" },
   },
   {
     id: "build",
     title: "Build · Reuse · Route",
-    blurb: "Work flows to its most natural home — by fit and capacity.",
+    blurb: "Work goes to whoever is best placed to take it on — by fit and capacity.",
     icon: Library,
     target: { kind: "node", nodeId: "route" },
     accent: true,
@@ -137,11 +139,42 @@ const ENABLERS: Tile[] = [
     target: { kind: "node", nodeId: "value" },
   },
   {
+    id: "studio",
+    title: "Citizen Development Studio",
+    blurb: "A guided build environment that makes it easier to turn ideas into working solutions.",
+    icon: Sparkles,
+    target: { kind: "node", nodeId: "route" },
+  },
+  {
     id: "support",
     title: "Support & Community",
     blurb: "Living portfolio, office hours, working library.",
     icon: Users,
     target: { kind: "node", nodeId: "portfolio" },
+  },
+];
+
+const SUPPORT: Tile[] = [
+  {
+    id: "support-product-line",
+    title: "Product Line AI Resources",
+    blurb: "First line for product line ideas.",
+    icon: Building2,
+    target: { kind: "anchor", anchor: "roles" },
+  },
+  {
+    id: "support-central",
+    title: "Central AI Team",
+    blurb: "Primary path for enterprise and leadership requests.",
+    icon: Network,
+    target: { kind: "anchor", anchor: "roles" },
+  },
+  {
+    id: "support-shared",
+    title: "Shared Capacity",
+    blurb: "Mutual support where capacity allows.",
+    icon: Users,
+    target: { kind: "anchor", anchor: "roles" },
   },
 ];
 
@@ -277,7 +310,7 @@ function CanvasPage() {
 
           <Layer
             eyebrow="Layer 2 · Capability Network"
-            caption="One role family · two organisational homes. Training strengthens both."
+            caption="One role family in two homes. Training strengthens both."
           >
             <div className="grid gap-4 md:grid-cols-2">
               {NETWORK.map((t) => (
@@ -310,7 +343,7 @@ function CanvasPage() {
 
           <Layer
             eyebrow="Layer 3 · Flow of Work"
-            caption="The spine. Where ideas become solutions."
+            caption="The spine. Where ideas turn into working solutions."
             spine
           >
             <div className="relative">
@@ -332,15 +365,35 @@ function CanvasPage() {
                 ))}
               </div>
               <p className="mt-5 text-center text-[12px] italic text-muted-foreground">
-                Routes by fit and capacity — not always upward, not always central.
+                Work flows to whoever is best placed to take it on — not always upward, not always central.
               </p>
+            </div>
+          </Layer>
+
+          <Connector label="supported by" />
+
+          <Layer
+            eyebrow="Support network"
+            caption="Close to the business · enterprise coordination · flexible collaboration."
+          >
+            <div className="grid gap-4 md:grid-cols-3">
+              {SUPPORT.map((t) => (
+                <CanvasTile
+                  key={t.id}
+                  tile={t}
+                  dim={isDimmed(t.id)}
+                  onHover={setHover}
+                  onSelect={goTo}
+                  muted
+                />
+              ))}
             </div>
           </Layer>
 
           <Connector label="held up by" />
 
           <Layer eyebrow="Layer 4 · System Enablers" caption="Persistent foundations across the whole model.">
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {ENABLERS.map((t) => (
                 <CanvasTile
                   key={t.id}
@@ -352,11 +405,20 @@ function CanvasPage() {
               ))}
             </div>
           </Layer>
+
+          <div className="md:pl-[212px]">
+            <div className="flex items-start gap-3 rounded-xl border border-hairline bg-card/60 px-5 py-4">
+              <Wrench className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+              <p className="text-[12.5px] leading-relaxed text-muted-foreground">
+                <span className="font-medium text-foreground">Way of Working — </span>
+                Today: we use the current way of working. Over time: citizen development lives inside the Way of Working Tool as the shared source of truth.
+              </p>
+            </div>
+          </div>
         </div>
 
         <p className="mx-auto mt-16 max-w-3xl text-center text-[13px] leading-relaxed text-muted-foreground">
-          Product line and central AI citizen developers are one role family in two organisational
-          homes. Work routes to its most natural owner by origin, fit, skill, and capacity.
+          Product line and central AI citizen developers are one role family in two homes. Work goes to whoever is best placed to take it on — by origin, fit, skill, and capacity.
         </p>
 
         <div className="mt-10 flex justify-center">
