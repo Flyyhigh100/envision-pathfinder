@@ -1044,6 +1044,30 @@ function Index() {
   const [openId, setOpenId] = useState<NodeId | null>(null);
   const [scenarioId, setScenarioId] = useState<string>(SCENARIOS[0].id);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const open = params.get("open");
+    const validIds: NodeId[] = [
+      "intake",
+      "assessment",
+      "route",
+      "portfolio",
+      "value",
+      "training",
+      "governance",
+    ];
+    if (open && (validIds as string[]).includes(open)) {
+      setOpenId(open as NodeId);
+      return;
+    }
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
   const openNode = useMemo(() => NODES.find((n) => n.id === openId) ?? null, [openId]);
   const scenario = useMemo(() => SCENARIOS.find((s) => s.id === scenarioId)!, [scenarioId]);
 
