@@ -109,14 +109,14 @@ const FLOW: Tile[] = [
   {
     id: "assessment",
     title: "Assessment & Routing",
-    blurb: "A short, honest shaping conversation against a small rubric.",
+    blurb: "A short, honest check to decide the best path forward.",
     icon: GitBranch,
     target: { kind: "node", nodeId: "assessment" },
   },
   {
     id: "build",
     title: "Build · Reuse · Route",
-    blurb: "Work flows to its most natural home — by fit and capacity.",
+    blurb: "Work goes to whoever is best placed to take it on — by fit and capacity.",
     icon: Library,
     target: { kind: "node", nodeId: "route" },
     accent: true,
@@ -139,11 +139,42 @@ const ENABLERS: Tile[] = [
     target: { kind: "node", nodeId: "value" },
   },
   {
+    id: "studio",
+    title: "Citizen Development Studio",
+    blurb: "A guided build environment that makes it easier to turn ideas into working solutions.",
+    icon: Sparkles,
+    target: { kind: "node", nodeId: "route" },
+  },
+  {
     id: "support",
     title: "Support & Community",
     blurb: "Living portfolio, office hours, working library.",
     icon: Users,
     target: { kind: "node", nodeId: "portfolio" },
+  },
+];
+
+const SUPPORT: Tile[] = [
+  {
+    id: "support-product-line",
+    title: "Product Line AI Resources",
+    blurb: "First line for product line ideas.",
+    icon: Building2,
+    target: { kind: "anchor", anchor: "roles" },
+  },
+  {
+    id: "support-central",
+    title: "Central AI Team",
+    blurb: "Primary path for enterprise and leadership requests.",
+    icon: Network,
+    target: { kind: "anchor", anchor: "roles" },
+  },
+  {
+    id: "support-shared",
+    title: "Shared Capacity",
+    blurb: "Mutual support where capacity allows.",
+    icon: Users,
+    target: { kind: "anchor", anchor: "roles" },
   },
 ];
 
