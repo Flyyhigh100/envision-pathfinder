@@ -1118,8 +1118,29 @@ function Index() {
         </div>
       </header>
 
-      {/* Strategy canvas · big-picture anchor */}
-      <StrategyCanvasHero onSelect={handleStrategySelect} />
+      {/* Canvas CTA · link to the one-page operating model */}
+      <section className="border-b border-hairline bg-surface/40">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-5 md:flex-row md:items-center md:justify-between md:py-4">
+          <div className="flex items-start gap-3 md:items-center">
+            <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-teal/30 bg-teal-soft text-teal md:mt-0">
+              <Compass className="h-3.5 w-3.5" />
+            </span>
+            <div className="leading-tight">
+              <div className="text-[13px] font-medium">See the whole operating model on one page</div>
+              <div className="text-[12px] text-muted-foreground">
+                Direction, flow of work, support, and system enablers — together at a glance.
+              </div>
+            </div>
+          </div>
+          <Link
+            to="/canvas"
+            className="inline-flex items-center gap-1.5 self-start rounded-full border border-teal/40 bg-card px-4 py-1.5 text-[11px] font-medium uppercase tracking-[0.14em] text-teal transition-colors hover:bg-teal-soft md:self-auto"
+          >
+            Open the canvas
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </section>
 
       {/* Strategy overview · front door */}
       <StrategyOverview onSelect={handleStrategySelect} />
