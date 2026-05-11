@@ -343,7 +343,7 @@ function CanvasPage() {
 
           <Layer
             eyebrow="Layer 3 · Flow of Work"
-            caption="The spine. Where ideas become solutions."
+            caption="The spine. Where ideas turn into working solutions."
             spine
           >
             <div className="relative">
@@ -365,15 +365,35 @@ function CanvasPage() {
                 ))}
               </div>
               <p className="mt-5 text-center text-[12px] italic text-muted-foreground">
-                Routes by fit and capacity — not always upward, not always central.
+                Work flows to whoever is best placed to take it on — not always upward, not always central.
               </p>
+            </div>
+          </Layer>
+
+          <Connector label="supported by" />
+
+          <Layer
+            eyebrow="Support network"
+            caption="Close to the business · enterprise coordination · flexible collaboration."
+          >
+            <div className="grid gap-4 md:grid-cols-3">
+              {SUPPORT.map((t) => (
+                <CanvasTile
+                  key={t.id}
+                  tile={t}
+                  dim={isDimmed(t.id)}
+                  onHover={setHover}
+                  onSelect={goTo}
+                  muted
+                />
+              ))}
             </div>
           </Layer>
 
           <Connector label="held up by" />
 
           <Layer eyebrow="Layer 4 · System Enablers" caption="Persistent foundations across the whole model.">
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               {ENABLERS.map((t) => (
                 <CanvasTile
                   key={t.id}
@@ -385,11 +405,20 @@ function CanvasPage() {
               ))}
             </div>
           </Layer>
+
+          <div className="md:pl-[212px]">
+            <div className="flex items-start gap-3 rounded-xl border border-hairline bg-card/60 px-5 py-4">
+              <Wrench className="mt-0.5 h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+              <p className="text-[12.5px] leading-relaxed text-muted-foreground">
+                <span className="font-medium text-foreground">Way of Working — </span>
+                Today: we use the current way of working. Over time: citizen development lives inside the Way of Working Tool as the shared source of truth.
+              </p>
+            </div>
+          </div>
         </div>
 
         <p className="mx-auto mt-16 max-w-3xl text-center text-[13px] leading-relaxed text-muted-foreground">
-          Product line and central AI citizen developers are one role family in two organisational
-          homes. Work routes to its most natural owner by origin, fit, skill, and capacity.
+          Product line and central AI citizen developers are one role family in two homes. Work goes to whoever is best placed to take it on — by origin, fit, skill, and capacity.
         </p>
 
         <div className="mt-10 flex justify-center">
