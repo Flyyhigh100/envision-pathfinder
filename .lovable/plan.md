@@ -1,70 +1,87 @@
 ## Goal
 
-Add a premium **strategy canvas hero** at the very top of `/` — a single, calm, executive-grade visual that explains the entire Citizen Development operating model at a glance. Everything currently on the page (StrategyOverview, vision/roadmap hero, detailed model, scenarios, etc.) stays exactly as is, just below.
+Transform `/canvas` into a premium one-page strategy experience anchored by a custom-generated hero image, then progressively unpack the Citizen Development operating model layer by layer underneath — keeping the hero canvas visible as a conceptual anchor throughout.
 
-## What the hero shows
-
-One connected canvas with three horizontal bands and an integrated support strip — minimal text, elegant connectors, generous whitespace.
+## Page structure
 
 ```text
-                          DIRECTION
-        ┌──────────┐     ┌──────────────────┐     ┌────────────────────────┐
-        │  Vision  │  ─  │ Strategy & Roadmap │  ─ │ Training & Enablement │
-        └──────────┘     └──────────────────┘     └────────────────────────┘
-                              │  guides
-                          FLOW OF WORK  (the spine)
-        ┌─────────────┐  →  ┌──────────────────┐  →  ┌──────────────────┐
-        │   Intake    │     │  Assess & Route  │     │ Build · Reuse · Route │
-        └─────────────┘     └──────────────────┘     └──────────────────┘
-              ─── support model (one slim row, integrated, no org chart) ───
-        Product Line AI Resources  ·  Central AI Team  ·  Shared Capacity
-                              │  enables
-                          SYSTEM ENABLERS
-   Governance · Value Tracking · Support & Community · CD Studio · Way of Working Tool
+┌──────────────────────────────────────────────────────────────┐
+│ 1. HERO / BIG PICTURE                                        │
+│   • Generated wide-format system-map image (the anchor)      │
+│   • Headline + 1 short paragraph                             │
+│   • Quiet "Scroll to unpack" hint                            │
+├──────────────────────────────────────────────────────────────┤
+│ 2. FLOW OF WORK            (operational spine)               │
+│ 3. SUPPORT MODEL           (travels with the work)           │
+│ 4. SYSTEM ENABLERS         (governance · value · platform)   │
+│ 5. PRACTICAL SCENARIOS     (4 example journeys)              │
+└──────────────────────────────────────────────────────────────┘
+   Sticky mini-map on the right (lg+) re-renders the hero in   
+   miniature and highlights the active layer as user scrolls.  
 ```
 
-- **Top band — Direction**: 3 small tiles (Vision, Strategy & Roadmap, Training & Enablement) with one-line labels.
-- **Middle band — Flow of work**: the visual spine, slightly emphasised (teal hairline, soft tinted surface), 3 stages with thin arrow connectors.
-- **Integrated support strip** sits *inside* the spine band as a single slim row of three pills with one-line role: *first line · enterprise & leadership path · mutual support*. No boxes-with-reporting-lines feel.
-- **Bottom band — System enablers**: 5 quiet chips in one row (Governance & Boundaries, Value Tracking, Support & Community, Citizen Development Studio, Way of Working Tool).
-- Two thin vertical connectors with tiny eyebrow labels (*guides* between top↔middle, *enables* between bottom↔middle) to make hierarchy obvious.
+## 1. Hero image (generated once, saved to `src/assets/`)
 
-## Look & feel
+Use the agent image generator (`imagegen--generate_image`, `model: "premium"`, 1920×1024, transparent_background false) with this prompt — captured verbatim from the user's brief, tightened for a single render:
 
-- Light neutral background, charcoal text, restrained teal accents only on the spine, connectors, and active hover.
-- Hairline borders, generous padding, no shadows beyond the existing `shadow-soft`.
-- Reuses existing tokens (`hairline`, `teal`, `teal-soft`, `surface`, `card`, `muted-foreground`) — no new design tokens, no new dependencies.
-- Subtle `framer-motion` fade/rise on mount only. No scattered micro-interactions.
-- Tiles are clickable and deep-link into existing detail (same pattern as `/canvas`):
-  - Direction → `#vision`, `#roadmap`, node `training`
-  - Flow → nodes `intake`, `assessment`, `route`
-  - Support pills → `#roles`
-  - Enablers → nodes `governance`, `value`, `portfolio`, `route` (Studio), plus a quiet *Way of Working Tool* tile that scrolls to a small footnote (no new route)
-- A small hint chip below the canvas: *"Scroll for the detailed model"* with a chevron — sets the "okay, how do we operationalise this?" follow-up.
+> Premium enterprise visual metaphor of a Citizen Development operating model as a single connected system map. Three horizontal layers on a calm off-white background: top layer of small elegant nodes for direction & capability, middle horizontal flow of three nodes connected by soft directional arrows for Idea Intake → Assessment → Build/Reuse/Route, bottom layer of three nodes for Governance, Value, and Community. Charcoal text accents, subtle teal highlights on the middle spine, soft thin connectors between layers, soft shadows, clean geometry, generous whitespace, modern restrained consulting aesthetic. No dashboards, no gradients, no neon, no sci-fi, minimal text inside the image.
 
-## Wording rules
+Save to `src/assets/canvas-hero.png`. If the first render is busy or off-brief, regenerate once with a tightened prompt.
 
-- Plain business language. No "rubric", no internal jargon.
-- One short label + at most one short supporting line per tile.
-- Reuses the already-approved phrasing from `/canvas` so the two views stay consistent.
+## 2. Hero section
 
-## Where it goes
+- Full-bleed container, max-w-7xl, generous top padding.
+- `<img>` of the generated hero with `loading="eager"`, soft `shadow-soft`, hairline border, rounded-2xl. Alt text describes the system map for SEO/a11y.
+- Eyebrow: `Operating Model · One connected system`
+- H1 (≈40px): "Citizen Development is one connected operating model."
+- Sub (1 short paragraph, ~2 lines): platform, support, governance, and community working as one.
+- Quiet scroll hint with chevron → `#flow`.
 
-- New component `StrategyCanvasHero` rendered in `src/routes/index.tsx` **immediately after `</header>` and before `<StrategyOverview />`**, so it is the first thing seen on `/`.
-- Existing sections (StrategyOverview, vision hero, roadmap, detailed model, scenarios, footer) are untouched.
-- Header `Overview` link still scrolls to `#overview` (StrategyOverview). A new top anchor `#model` is added on the hero so the header can optionally point to it later — not required now.
+## 3. Layered scroll sections (`#flow`, `#support`, `#enablers`, `#scenarios`)
 
-## What stays the same
+Reuse the existing `Layer` / `CanvasTile` / `Connector` components already in `src/routes/canvas.tsx` so the deeper sections visually echo the hero. Each section:
 
-- `/canvas` route, all modals, `STRATEGY_NODES`, `NODES`, `SCENARIOS`, `ROLES`, all copy below the new hero.
-- No backend, no new routes, no new packages.
+- Eyebrow chip with section number (`02 · Flow of Work` etc.)
+- Short caption
+- Existing tiles regrouped per section:
+  - **Flow** → existing `FLOW` tiles (Intake, Assessment, Build·Reuse·Route)
+  - **Support** → existing `SUPPORT` + `TRAINING` tile (support & community + training travels with the work)
+  - **Enablers** → existing `ENABLERS` tiles (Governance, Value, Studio, Support & Community) plus a small "Way of Working tool" footnote card already present
+  - **Scenarios** → new section with 4 cards:
+    1. Business user with an idea → Intake → product-line picks up
+    2. Product line with an existing reusable solution → reuse path
+    3. Enterprise idea needing central support → central team picks up
+    4. Higher-risk / cross-cutting use case → routed by complexity & governance
+    Each card shows a 3-step mini path using the same pill style as the spine.
 
-## Files touched
+## 4. Sticky mini-map (lg+ only)
 
-- `src/routes/index.tsx` — add `StrategyCanvasHero` component and render it once at the top of the page. No other edits.
+- Right-rail sticky panel (`top-24`, hidden < lg) containing a small version of the hero image (or a CSS-drawn 3-band schematic) with 4 dots labelled Flow · Support · Enablers · Scenarios.
+- Uses `IntersectionObserver` on the section anchors to highlight the active dot in teal.
+- Clicking a dot smooth-scrolls to that section.
+- Keeps the user anchored to the big picture throughout.
+
+## 5. Lens chips & old framing
+
+- Remove the existing `LENSES` chips and the current "Layer 1 / Layer 2 / Layer 3 / Layer 4" framing — they become redundant once the page is structured around Hero → Flow → Support → Enablers → Scenarios.
+- Keep `DIRECTION`, `NETWORK`, `TRAINING`, `FLOW`, `SUPPORT`, `ENABLERS` data — `DIRECTION` and `NETWORK` are now represented inside the hero image itself, with one short "Direction & capability" paragraph above the Flow section linking to `/#vision`, `/#roadmap`, and node `training` for users who want the deeper detail.
+
+## 6. Routing & links
+
+- All tiles keep their existing deep-links into `/` (anchors and node IDs) — no behaviour change there.
+- Top header: keep current "Detailed model" / "Canvas" links, no new routes.
+
+## Technical notes
+
+- File touched: `src/routes/canvas.tsx` (rewrite component body, keep Route export & data constants).
+- New asset: `src/assets/canvas-hero.png` via `imagegen--generate_image`.
+- Add a tiny `useActiveSection(ids: string[])` hook inside the file using `IntersectionObserver` for the mini-map.
+- Reuse existing tokens: `surface`, `card`, `hairline`, `teal`, `teal-soft`, `charcoal`, `muted-foreground`, `shadow-soft`. No new design tokens, no new dependencies.
+- `framer-motion` already present — fade/rise on section enter only (no scattered micro-interactions).
+- Type-check with `bunx tsc --noEmit` after implementation.
 
 ## Out of scope
 
-- No changes to `/canvas` (it remains the deeper working canvas for sessions).
-- No changes to detailed model, scenarios, or footer.
-- No new colors, fonts, or tokens.
+- No changes to `/` (detailed model), modals, scenarios, or footer there.
+- No new routes, no backend, no new packages.
+- No changes to `STRATEGY_NODES`, `NODES`, `SCENARIOS`, `ROLES` data on `/`.
