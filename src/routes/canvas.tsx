@@ -15,6 +15,8 @@ import {
   Building2,
   Network,
   ArrowRight,
+  Sparkles,
+  Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
