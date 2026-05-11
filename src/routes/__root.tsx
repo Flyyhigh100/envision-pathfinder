@@ -80,6 +80,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Operating Model — Now / Next / North Star" },
+      { name: "twitter:description", content: "A clear way to think about our operating model — explore the proposed shape across Now, Next and North Star phases." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5a6b2ceb-0553-446e-a621-784f09fea207/id-preview-f4d12694--d367762a-3ade-4df3-8427-c9b75f452f46.lovable.app-1778505672475.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/5a6b2ceb-0553-446e-a621-784f09fea207/id-preview-f4d12694--d367762a-3ade-4df3-8427-c9b75f452f46.lovable.app-1778505672475.png" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
