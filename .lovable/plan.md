@@ -1,50 +1,70 @@
 ## Goal
 
-Refine `/canvas` so any business leader gets it in one pass. Four small, focused changes — same one-page layout, same calm tone.
+Add a premium **strategy canvas hero** at the very top of `/` — a single, calm, executive-grade visual that explains the entire Citizen Development operating model at a glance. Everything currently on the page (StrategyOverview, vision/roadmap hero, detailed model, scenarios, etc.) stays exactly as is, just below.
 
-## 1 · Add the platform as an enabler
+## What the hero shows
 
-Add a fourth tile to Layer 4 (System Enablers):
+One connected canvas with three horizontal bands and an integrated support strip — minimal text, elegant connectors, generous whitespace.
 
-- **Citizen Development Studio**
-- *A guided build environment that makes it easier to turn ideas into working solutions.*
+```text
+                          DIRECTION
+        ┌──────────┐     ┌──────────────────┐     ┌────────────────────────┐
+        │  Vision  │  ─  │ Strategy & Roadmap │  ─ │ Training & Enablement │
+        └──────────┘     └──────────────────┘     └────────────────────────┘
+                              │  guides
+                          FLOW OF WORK  (the spine)
+        ┌─────────────┐  →  ┌──────────────────┐  →  ┌──────────────────┐
+        │   Intake    │     │  Assess & Route  │     │ Build · Reuse · Route │
+        └─────────────┘     └──────────────────┘     └──────────────────┘
+              ─── support model (one slim row, integrated, no org chart) ───
+        Product Line AI Resources  ·  Central AI Team  ·  Shared Capacity
+                              │  enables
+                          SYSTEM ENABLERS
+   Governance · Value Tracking · Support & Community · CD Studio · Way of Working Tool
+```
 
-Sits alongside Governance, Value Tracking, and Community. Layer 4 grid becomes 4 tiles wide on desktop.
+- **Top band — Direction**: 3 small tiles (Vision, Strategy & Roadmap, Training & Enablement) with one-line labels.
+- **Middle band — Flow of work**: the visual spine, slightly emphasised (teal hairline, soft tinted surface), 3 stages with thin arrow connectors.
+- **Integrated support strip** sits *inside* the spine band as a single slim row of three pills with one-line role: *first line · enterprise & leadership path · mutual support*. No boxes-with-reporting-lines feel.
+- **Bottom band — System enablers**: 5 quiet chips in one row (Governance & Boundaries, Value Tracking, Support & Community, Citizen Development Studio, Way of Working Tool).
+- Two thin vertical connectors with tiny eyebrow labels (*guides* between top↔middle, *enables* between bottom↔middle) to make hierarchy obvious.
 
-## 2 · Plain-language pass
+## Look & feel
 
-Small copy edits across the canvas:
+- Light neutral background, charcoal text, restrained teal accents only on the spine, connectors, and active hover.
+- Hairline borders, generous padding, no shadows beyond the existing `shadow-soft`.
+- Reuses existing tokens (`hairline`, `teal`, `teal-soft`, `surface`, `card`, `muted-foreground`) — no new design tokens, no new dependencies.
+- Subtle `framer-motion` fade/rise on mount only. No scattered micro-interactions.
+- Tiles are clickable and deep-link into existing detail (same pattern as `/canvas`):
+  - Direction → `#vision`, `#roadmap`, node `training`
+  - Flow → nodes `intake`, `assessment`, `route`
+  - Support pills → `#roles`
+  - Enablers → nodes `governance`, `value`, `portfolio`, `route` (Studio), plus a quiet *Way of Working Tool* tile that scrolls to a small footnote (no new route)
+- A small hint chip below the canvas: *"Scroll for the detailed model"* with a chevron — sets the "okay, how do we operationalise this?" follow-up.
 
-- Assessment & Routing → *A short, honest check to decide the best path forward.* (drops "rubric")
-- Build · Reuse · Route → *Work goes to whoever is best placed to take it on — by fit and capacity.*
-- Layer 2 caption → *One role family in two homes. Training strengthens both.*
-- Layer 3 caption → *Where ideas turn into working solutions.*
-- Routing footnote → *Work flows to whoever is best placed to take it on — not always upward, not always central.*
-- Closing footnote → same, simplified to match.
+## Wording rules
 
-## 3 · Make the support model explicit
+- Plain business language. No "rubric", no internal jargon.
+- One short label + at most one short supporting line per tile.
+- Reuses the already-approved phrasing from `/canvas` so the two views stay consistent.
 
-Add one slim **Support network** band between Layer 3 and Layer 4 — three pills, no arrows, no hierarchy:
+## Where it goes
 
-- **Product Line AI Resources** — *First line for product line ideas.*
-- **Central AI Team** — *Primary path for enterprise and leadership requests.*
-- **Shared Capacity** — *Mutual support where capacity allows.*
-
-Eyebrow: *Support network*. Caption: *Close to the business · enterprise coordination · flexible collaboration.*
-
-## 4 · Way of Working note
-
-A quiet one-line note under Layer 4 (not a tile):
-
-> *Today: we use the current way of working. Over time: citizen development lives inside the Way of Working Tool as the shared source of truth.*
+- New component `StrategyCanvasHero` rendered in `src/routes/index.tsx` **immediately after `</header>` and before `<StrategyOverview />`**, so it is the first thing seen on `/`.
+- Existing sections (StrategyOverview, vision hero, roadmap, detailed model, scenarios, footer) are untouched.
+- Header `Overview` link still scrolls to `#overview` (StrategyOverview). A new top anchor `#model` is added on the hero so the header can optionally point to it later — not required now.
 
 ## What stays the same
 
-- One connected page, four layers + spine
-- Existing tokens and tone
-- All current deep-links to `/`
-- No changes to `/`, modals, or any other file
+- `/canvas` route, all modals, `STRATEGY_NODES`, `NODES`, `SCENARIOS`, `ROLES`, all copy below the new hero.
+- No backend, no new routes, no new packages.
 
 ## Files touched
 
-- `src/routes/canvas.tsx` — only file edited.
+- `src/routes/index.tsx` — add `StrategyCanvasHero` component and render it once at the top of the page. No other edits.
+
+## Out of scope
+
+- No changes to `/canvas` (it remains the deeper working canvas for sessions).
+- No changes to detailed model, scenarios, or footer.
+- No new colors, fonts, or tokens.
