@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -1044,6 +1044,30 @@ function Index() {
   const [openId, setOpenId] = useState<NodeId | null>(null);
   const [scenarioId, setScenarioId] = useState<string>(SCENARIOS[0].id);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const open = params.get("open");
+    const validIds: NodeId[] = [
+      "intake",
+      "assessment",
+      "route",
+      "portfolio",
+      "value",
+      "training",
+      "governance",
+    ];
+    if (open && (validIds as string[]).includes(open)) {
+      setOpenId(open as NodeId);
+      return;
+    }
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, []);
+
   const openNode = useMemo(() => NODES.find((n) => n.id === openId) ?? null, [openId]);
   const scenario = useMemo(() => SCENARIOS.find((s) => s.id === scenarioId)!, [scenarioId]);
 
@@ -1075,13 +1099,19 @@ function Index() {
               <div className="text-[11px] text-muted-foreground">A working draft, open to refinement</div>
             </div>
           </div>
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-5 md:flex">
             <a
               href="#overview"
               className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-teal"
             >
               Overview
             </a>
+            <Link
+              to="/canvas"
+              className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-teal"
+            >
+              Canvas
+            </Link>
             <RoleToggle role={role} setRole={setRole} />
             <PhaseToggle phase={phase} setPhase={setPhase} />
           </div>
