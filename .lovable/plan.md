@@ -1,77 +1,50 @@
 ## Goal
 
-Add a new dedicated page — the **Operating Model Canvas** — designed for live stakeholder conversations. It shows the whole citizen development model on one screen as four horizontal layers connected by a visible spine, and lets users click any node to drill into the existing detail content on the home page.
+Refine `/canvas` so any business leader gets it in one pass. Four small, focused changes — same one-page layout, same calm tone.
 
-The current home (`/`) and its `StrategyOverview` grid stay exactly as they are. The canvas is a sibling page, linked from the header, not a replacement.
+## 1 · Add the platform as an enabler
 
-## New route
+Add a fourth tile to Layer 4 (System Enablers):
 
-`src/routes/canvas.tsx` — `/canvas`, with proper `head()` metadata (title, description, og:*).
+- **Citizen Development Studio**
+- *A guided build environment that makes it easier to turn ideas into working solutions.*
 
-## Page structure (single screen, four stacked layers)
+Sits alongside Governance, Value Tracking, and Community. Layer 4 grid becomes 4 tiles wide on desktop.
 
-```text
-   ┌─ Layer 1 · Direction ──────────────────────────────────┐
-   │   Vision / Why it matters     Strategy & Roadmap        │
-   └────────────────────────┬───────────────────────────────┘
-                            │  (sets direction for…)
-   ┌─ Layer 2 · Capability Network ─────────────────────────┐
-   │   Product line AI CDs ◀──shared role family──▶ Central │
-   │                  ▲                                ▲    │
-   │                  └─────── Training & Enablement ──┘    │
-   └────────────────────────┬───────────────────────────────┘
-                            │  (people who do the work)
-   ┌─ Layer 3 · Flow of Work (the spine) ───────────────────┐
-   │   Intake ─▶ Assessment & Routing ─▶ Build · Reuse ·    │
-   │                                            Route       │
-   └────────────────────────┬───────────────────────────────┘
-                            │  (held up by…)
-   ┌─ Layer 4 · System Enablers ────────────────────────────┐
-   │   Governance & Boundaries   Value Tracking   Support   │
-   └────────────────────────────────────────────────────────┘
-```
+## 2 · Plain-language pass
 
-Visual notes:
-- One connected canvas, not a card grid. Faint hairline rails behind each layer, soft vertical connector lines between layers, a slightly heavier accent on the Flow-of-Work spine.
-- Layer labels sit in the left gutter as small uppercase eyebrows.
-- Capability Network shows the two "homes" as two paired tiles with a horizontal connector labelled "one role family · two homes," and Training sitting beneath as a supporting tile feeding both.
-- Flow-of-work nodes are connected by arrows. A subtle annotation beneath the arrows reads "routes by fit and capacity — not always upward, not always central."
-- System Enablers render as a foundation band with three equal tiles.
-- Calm palette using existing tokens (`bg-card`, `border-hairline`, `text-teal`, `text-charcoal`, `text-muted-foreground`). No new colors.
+Small copy edits across the canvas:
 
-## Interactions (conversation tool, not static)
+- Assessment & Routing → *A short, honest check to decide the best path forward.* (drops "rubric")
+- Build · Reuse · Route → *Work goes to whoever is best placed to take it on — by fit and capacity.*
+- Layer 2 caption → *One role family in two homes. Training strengthens both.*
+- Layer 3 caption → *Where ideas turn into working solutions.*
+- Routing footnote → *Work flows to whoever is best placed to take it on — not always upward, not always central.*
+- Closing footnote → same, simplified to match.
 
-- **Click any node** → navigate to `/` and open the matching detail (anchor for `vision`/`roadmap`, modal node for the rest). Reuse the existing `StrategyTarget` mechanism by passing a query param (e.g. `?open=intake` or `#vision`) that the home route reads on mount and opens accordingly.
-- **Hover a node** → connectors related to that node brighten; others dim. Helps explain handoffs in a live walk-through.
-- **Lens chips** at the top of the canvas (small, optional, off by default) to highlight a single relationship at a time:
-  - "Where work enters" → highlight Intake + connector to capability network
-  - "Who picks it up" → highlight both capability tiles + Build·Reuse·Route
-  - "How routing works" → highlight Assessment + Build·Reuse·Route + the routing annotation
-  - "What supports the model" → highlight Layer 4 enablers + their connectors upward
-  Lenses are pure visual emphasis (opacity / accent), not filters that hide content.
-- **"Open detail"** affordance on each node (small `ArrowUpRight`) makes click-through obvious.
+## 3 · Make the support model explicit
 
-## Wiring to existing content
+Add one slim **Support network** band between Layer 3 and Layer 4 — three pills, no arrows, no hierarchy:
 
-- Reuse `STRATEGY_NODES` data (extract to `src/lib/strategy-nodes.ts` so both `/` and `/canvas` import it; no behavioural change to home).
-- On `/`, read `location.search` / `location.hash` once on mount: if `?open=<nodeId>` is present, set `openId`; if a hash matches a section, scroll to it. This lets the canvas deep-link cleanly.
-- Header gets a new `<Link to="/canvas">Canvas</Link>` next to the existing "Overview" link, on both `/` and `/canvas`. Canvas page has a matching link back to `/` ("Detailed model").
+- **Product Line AI Resources** — *First line for product line ideas.*
+- **Central AI Team** — *Primary path for enterprise and leadership requests.*
+- **Shared Capacity** — *Mutual support where capacity allows.*
 
-## Framing copy on the canvas
+Eyebrow: *Support network*. Caption: *Close to the business · enterprise coordination · flexible collaboration.*
 
-- Eyebrow: `OPERATING MODEL CANVAS`
-- Title (single line, restrained): `One page. The whole way of working.`
-- Subtitle: `A working view for stakeholder conversations — direction, the people who do the work, how work flows, and what holds it all up.`
-- Footnote under the spine: `Product line and central AI citizen developers are one role family in two organisational homes. Work routes to its most natural owner by origin, fit, skill, and capacity.`
+## 4 · Way of Working note
 
-## Out of scope
+A quiet one-line note under Layer 4 (not a tile):
 
-- No changes to `NODES`, `SCENARIOS`, `ROLES`, phase/role toggles, or any modal content.
-- No new colors, fonts, or design tokens.
-- No backend, no data fetching.
+> *Today: we use the current way of working. Over time: citizen development lives inside the Way of Working Tool as the shared source of truth.*
+
+## What stays the same
+
+- One connected page, four layers + spine
+- Existing tokens and tone
+- All current deep-links to `/`
+- No changes to `/`, modals, or any other file
 
 ## Files touched
 
-- **new** `src/routes/canvas.tsx` — the canvas page + layout + connectors + lens chips.
-- **new** `src/lib/strategy-nodes.ts` — extract `STRATEGY_NODES` and `StrategyTarget` types so both routes share them.
-- **edit** `src/routes/index.tsx` — import shared strategy nodes; add header `Canvas` link; on mount, honor `?open=<nodeId>` and `#<anchor>` for deep links from the canvas.
+- `src/routes/canvas.tsx` — only file edited.
