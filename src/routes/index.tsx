@@ -1075,13 +1075,19 @@ function Index() {
               <div className="text-[11px] text-muted-foreground">A working draft, open to refinement</div>
             </div>
           </div>
-          <div className="hidden items-center gap-3 md:flex">
+          <div className="hidden items-center gap-5 md:flex">
             <a
               href="#overview"
               className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-teal"
             >
               Overview
             </a>
+            <Link
+              to="/canvas"
+              className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-teal"
+            >
+              Canvas
+            </Link>
             <RoleToggle role={role} setRole={setRole} />
             <PhaseToggle phase={phase} setPhase={setPhase} />
           </div>
