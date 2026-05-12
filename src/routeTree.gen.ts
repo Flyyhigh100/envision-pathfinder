@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as CanvasRouteImport } from './routes/canvas'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CanvasFlowRouteImport } from './routes/canvas.flow'
 
 const CanvasRoute = CanvasRouteImport.update({
   id: '/canvas',
@@ -22,31 +23,39 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CanvasFlowRoute = CanvasFlowRouteImport.update({
+  id: '/flow',
+  path: '/flow',
+  getParentRoute: () => CanvasRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/canvas': typeof CanvasRoute
+  '/canvas': typeof CanvasRouteWithChildren
+  '/canvas/flow': typeof CanvasFlowRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/canvas': typeof CanvasRoute
+  '/canvas': typeof CanvasRouteWithChildren
+  '/canvas/flow': typeof CanvasFlowRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/canvas': typeof CanvasRoute
+  '/canvas': typeof CanvasRouteWithChildren
+  '/canvas/flow': typeof CanvasFlowRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/canvas'
+  fullPaths: '/' | '/canvas' | '/canvas/flow'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/canvas'
-  id: '__root__' | '/' | '/canvas'
+  to: '/' | '/canvas' | '/canvas/flow'
+  id: '__root__' | '/' | '/canvas' | '/canvas/flow'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  CanvasRoute: typeof CanvasRoute
+  CanvasRoute: typeof CanvasRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -65,23 +74,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/canvas/flow': {
+      id: '/canvas/flow'
+      path: '/flow'
+      fullPath: '/canvas/flow'
+      preLoaderRoute: typeof CanvasFlowRouteImport
+      parentRoute: typeof CanvasRoute
+    }
   }
 }
 
+interface CanvasRouteChildren {
+  CanvasFlowRoute: typeof CanvasFlowRoute
+}
+
+const CanvasRouteChildren: CanvasRouteChildren = {
+  CanvasFlowRoute: CanvasFlowRoute,
+}
+
+const CanvasRouteWithChildren =
+  CanvasRoute._addFileChildren(CanvasRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  CanvasRoute: CanvasRoute,
+  CanvasRoute: CanvasRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
