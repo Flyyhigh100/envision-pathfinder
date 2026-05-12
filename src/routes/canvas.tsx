@@ -273,6 +273,12 @@ function CanvasPage() {
             >
               Canvas
             </Link>
+            <Link
+              to="/canvas/flow"
+              className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground transition-colors hover:text-teal"
+            >
+              Flow
+            </Link>
           </div>
         </div>
       </header>
